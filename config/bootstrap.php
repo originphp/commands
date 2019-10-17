@@ -31,6 +31,16 @@ ConnectionManager::config('test', [
     'engine' => env('DB_ENGINE', 'mysql')
 ]);
 
+Queue::config('default', [
+    'engine' => 'Database',
+    'connection' => 'default'
+]);
+
+Queue::config('test', [
+    'engine' => 'Database',
+    'connection' => 'test'
+]);
+
 Queue::config('test', [
     'engine' => 'Database',
     'connection' => 'test'
