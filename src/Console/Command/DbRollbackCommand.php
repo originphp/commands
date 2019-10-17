@@ -29,14 +29,14 @@ class DbRollbackCommand extends Command
      */
     protected $Migration = null;
 
-    public function initialize() : void
+    protected function initialize() : void
     {
         $this->addOption('connection', [
             'description' => 'Use a different datasource','short' => 'c','default' => 'default',
         ]);
     }
  
-    public function execute() : void
+    protected function execute() : void
     {
         $this->Migration = new Model([
             'name' => 'Migration',
