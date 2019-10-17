@@ -16,7 +16,7 @@ namespace Commands\Console\Command;
 
 use Origin\Model\Model;
 
-use Origin\Exception\Exception;
+use Origin\Core\Exception\Exception;
 use Origin\Console\Command\Command;
 use Origin\Model\Concern\Timestampable;
 
