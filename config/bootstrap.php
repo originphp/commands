@@ -11,9 +11,9 @@ use Origin\Model\ConnectionManager;
 require __DIR__ . '/paths.php';
 require ORIGIN . '/src/bootstrap.php';
 
+Config::write('debug', env('APP_DEBUG', true));
 Config::write('App.namespace', 'Commands');
 Config::write('Schema.format', 'php');
-
 
 ConnectionManager::config('default', [
     'host' => env('DB_HOST', '127.0.0.1'),
