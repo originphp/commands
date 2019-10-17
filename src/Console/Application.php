@@ -2,7 +2,7 @@
 /**
  * Application initialization for
  */
-namespace Generate\Console;
+namespace Commands\Console;
 
 use Origin\Console\BaseApplication;
 
