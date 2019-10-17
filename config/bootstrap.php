@@ -4,8 +4,8 @@
  * This is the bootstrap for plugin when using as standalone (for development). Do not
  * use this bootstrap as a plugin. .gitattributes has blocked this from being installed.
  */
-use Origin\Core\Config;
 use Origin\Job\Queue;
+use Origin\Core\Config;
 use Origin\Model\ConnectionManager;
 
 require __DIR__ . '/paths.php';

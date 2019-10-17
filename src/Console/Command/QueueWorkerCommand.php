@@ -14,9 +14,9 @@
 declare(strict_types = 1);
 namespace Commands\Console\Command;
 
-use Origin\Console\Command\Command;
 use Origin\Job\Job;
 use Origin\Job\Queue;
+use Origin\Console\Command\Command;
 
 class QueueWorkerCommand extends Command
 {

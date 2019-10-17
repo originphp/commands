@@ -14,13 +14,13 @@
 declare(strict_types = 1);
 namespace Commands\Console\Command;
 
-use Origin\Console\Command\Command;
-
 use Locale;
+
 use DateTime;
 use ResourceBundle;
 use NumberFormatter;
 use IntlDateFormatter;
+use Origin\Console\Command\Command;
 
 class LocaleGenerateCommand extends Command
 {

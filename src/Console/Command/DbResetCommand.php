@@ -14,9 +14,9 @@
 declare(strict_types = 1);
 namespace Commands\Console\Command;
 
-use Origin\Console\Command\Command;
-
 use Origin\Core\Config;
+
+use Origin\Console\Command\Command;
 
 class DbResetCommand extends Command
 {

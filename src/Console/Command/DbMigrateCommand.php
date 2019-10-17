@@ -14,10 +14,10 @@
 declare(strict_types = 1);
 namespace Commands\Console\Command;
 
-use Origin\Console\Command\Command;
-
 use Origin\Model\Model;
+
 use Origin\Exception\Exception;
+use Origin\Console\Command\Command;
 use Origin\Model\Concern\Timestampable;
 
 class Migration extends Model

@@ -14,10 +14,10 @@
 declare(strict_types = 1);
 namespace Commands\Console\Command;
 
-use Origin\Console\Command\Command;
 use Origin\Core\Config;
 use Origin\Model\Connection;
 use Origin\Inflector\Inflector;
+use Origin\Console\Command\Command;
 use Origin\Model\ConnectionManager;
 use Origin\Model\Exception\DatasourceException;
 

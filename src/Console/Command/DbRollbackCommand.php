@@ -14,8 +14,8 @@
 declare(strict_types = 1);
 namespace Commands\Console\Command;
 
-use Origin\Console\Command\Command;
 use Origin\Model\Model;
+use Origin\Console\Command\Command;
 
 class DbRollbackCommand extends Command
 {
