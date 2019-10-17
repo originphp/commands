@@ -1,4 +1,17 @@
 <?php
+/**
+ * OriginPHP Framework
+ * Copyright 2018 - 2019 Jamiel Sharief.
+ *
+ * Licensed under The MIT License
+ * The above copyright notice and this permission notice shall be included in all copies or substantial
+ * portions of the Software.
+ *
+ * @copyright    Copyright (c) Jamiel Sharief
+ * @link         https://www.originphp.com
+ * @license      https://opensource.org/licenses/mit-license.php MIT License
+ */
+declare(strict_types = 1);
 namespace Commands\Test\Console\Command;
 
 use DumpSchema;
@@ -9,25 +22,17 @@ use Origin\TestSuite\ConsoleIntegrationTestTrait;
 class DbSchemaDumpCommandTest extends OriginTestCase
 {
     use ConsoleIntegrationTestTrait;
-
     protected $fixtures = ['Post'];
-
-    protected function deleteFile(string $filename)
-    {
-        if (file_exists($filename)) {
-            unlink($filename);
-        }
-    }
-    public function testDumpSQL()
+ 
+    public function testDumpingFile()
     {
         $filename = DATABASE . DS . 'dump.sql';
-        $this->deleteFile($filename);
 
         $this->exec('db:schema:dump --connection=test --type=sql dump');
         $this->assertExitSuccess();
         $this->assertOutputContains('Dumping database `commands` schema to ' . DATABASE . DS . 'dump.sql');
         $this->assertTrue(file_exists($filename));
-        
+
         $this->assertOutputContains('* posts');
 
         $contents = file_get_contents($filename);
@@ -42,31 +47,18 @@ class DbSchemaDumpCommandTest extends OriginTestCase
         }
     }
 
-    public function testDumpSqlException()
-    {
-        $this->exec('db:schema:dump --connection=test --type=sql dump', ['n']);
-        $this->assertExitError();
-        $this->assertErrorContains('Error saving schema file');
-
-        // Cleanup
-        $filename = DATABASE . DS . 'dump.sql';
-        $this->deleteFile($filename);
-    }
-
     public function testDumpPHP()
     {
         $filename = DATABASE . DS . 'dump.php';
-        $this->deleteFile($filename);
-     
         $this->exec('db:schema:dump --connection=test --type=php dump');
-    
+
         // use ds for windows based testing
         $this->assertExitSuccess();
-        $this->assertOutputContains('Dumping database `commands` schema to ' . ROOT . DS . 'database' . DS . 'dump.php');
+        $this->assertOutputContains('Dumping database `commands` schema to ' . DATABASE . DS . 'dump.php');
         $this->assertTrue(file_exists($filename));
         $this->assertOutputContains('* posts');
-    
-        // Check is valid object and some spot check
+
+        // Check is valid object and some spot checks
         include $filename;
         $schema = new DumpSchema();
         $this->assertInstanceOf(DumpSchema::class, $schema);
@@ -76,13 +68,20 @@ class DbSchemaDumpCommandTest extends OriginTestCase
         $this->assertNotEmpty($schema->posts['constraints']['primary']);
     }
 
+    public function testDumpSqlException()
+    {
+        $this->exec('db:schema:dump --connection=test --type=sql dump', ['n']);
+        $this->assertExitError();
+        $this->assertErrorContains('Error saving schema file');
+        @unlink(DATABASE . DS . '/dump.sql');
+    }
+
     public function testDumpPHPException()
     {
         $this->exec('db:schema:dump --connection=test --type=php dump', ['n']);
         $this->assertExitError();
         $this->assertErrorContains('Error saving schema file');
-        $filename = DATABASE . DS . 'dump.php';
-        $this->deleteFile($filename);
+        @unlink(DATABASE . DS . '/dump.php');
     }
 
     public function testDumpUnkownType()
