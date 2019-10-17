@@ -3,7 +3,8 @@
     "description": "OriginPHP Commands",
     "type": "library",
     "keywords": [
-        "originphp"
+        "originphp",
+        "commands"
     ],
     "homepage": "https://www.originphp.com",
     "license": "MIT",
