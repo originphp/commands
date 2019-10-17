@@ -1,0 +1,28 @@
+language: php
+php:
+  - 7.2
+  - 7.3
+  - 7.4snapshot
+dist: xenial
+env:
+  matrix:
+    - DB_ENGINE=mysql DB_HOST=localhost DB_USERNAME=root
+    - DB_ENGINE=pgsql DB_HOST=localhost DB_USERNAME=postgres
+services:
+  - mysql
+  - postgresql
+before_install:
+  - if [ $DB_ENGINE = 'mysql' ]; then mysql -u root -e 'CREATE DATABASE generate;'; fi
+  - if [ $DB_ENGINE = 'pgsql' ]; then psql -c 'CREATE DATABASE generate;' -U postgres; fi
+before_script:
+  - composer install --prefer-source --no-interaction
+script:
+  - vendor/bin/phpunit --coverage-clover=clover.xml
+after_script:
+  - wget https://github.com/php-coveralls/php-coveralls/releases/download/v2.1.0/php-coveralls.phar
+  - php php-coveralls.phar --verbose
+cache:
+  directories:
+    - $HOME/.composer/cache/files
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
