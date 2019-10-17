@@ -2,10 +2,13 @@
 /**
  * Application initialization for
  */
-namespace Commands\Console;
+namespace Generate\Console;
 
 use Origin\Console\BaseApplication;
 
+/**
+ * @codeCoverageIgnore
+ */
 class Application extends BaseApplication
 {
     /**
