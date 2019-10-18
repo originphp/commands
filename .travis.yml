@@ -19,7 +19,7 @@ before_install:
   - if [ $DB_ENGINE = 'mysql' ]; then mysql -u root -e 'CREATE DATABASE commands;'; fi
   - if [ $DB_ENGINE = 'pgsql' ]; then psql -c 'CREATE DATABASE commands;' -U postgres; fi
 before_script:
-  - if [[ $COVERAGE == "" ]]; then phpenv config-rm xdebug.ini; fi
+  - if [[ $COVERAGE == "" ]]; then phpenv config-rm xdebug.ini || return 0 ; fi
   - composer install --prefer-source --no-interaction
 script:
   - vendor/bin/phpunit --coverage-clover=clover.xml
