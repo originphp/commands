@@ -41,6 +41,7 @@ class DbSeedCommandTest extends OriginTestCase
     
     public function testExecuteArgumentNameFileNotExists()
     {
+        @mkdir(ROOT . 'plugins/make', 0775, true);
         Plugin::load('Make');
         $this->exec('db:seed --connection=test --type=sql Make.records');
         $this->assertExitError();

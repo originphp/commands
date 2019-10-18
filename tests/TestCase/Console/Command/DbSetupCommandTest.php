@@ -70,6 +70,7 @@ class DbSetupCommandTest extends \PHPUnit\Framework\TestCase
 
     public function testExecutePluginPath()
     {
+        @mkdir(ROOT . 'plugins/make', 0775, true);
         Plugin::load('Make');
         $this->exec('db:setup --connection=d4 --type=sql Make.pschema');
         $this->assertExitError();
