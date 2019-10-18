@@ -12,7 +12,7 @@ env:
   matrix:
     - DB_ENGINE=mysql DB_HOST=localhost DB_USERNAME=root
     - DB_ENGINE=pgsql DB_HOST=localhost DB_USERNAME=postgres
-matrix:
+jobs:
   - php: 7.2
     env: CODECOVERAGE=1
   - php: 7.3
