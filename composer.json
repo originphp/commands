@@ -1,6 +1,6 @@
 {
     "name": "originphp/commands",
-    "description": "OriginPHP Commands",
+    "description": "Console commands for the OriginPHP framework",
     "type": "library",
     "keywords": [
         "originphp",

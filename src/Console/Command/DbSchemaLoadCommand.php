@@ -25,10 +25,10 @@ class DbSchemaLoadCommand extends Command
     protected $name = 'db:schema:load';
     protected $description = 'Loads the database schema from file';
 
-    public function initialize() : void
+    protected function initialize() : void
     {
         $this->addOption('connection', [
-            'description' => 'Use a different datasource',
+            'description' => 'Use a different connection',
             'short' => 'c',
             'default' => 'default',
         ]);
@@ -41,7 +41,7 @@ class DbSchemaLoadCommand extends Command
         ]);
     }
  
-    public function execute() : void
+    protected function execute() : void
     {
         $name = $this->arguments('name') ?? 'schema';
         $type = $this->options('type');

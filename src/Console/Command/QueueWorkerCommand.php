@@ -53,7 +53,7 @@ class QueueWorkerCommand extends Command
      *
      * @return void
      */
-    public function initialize(): void
+    protected function initialize(): void
     {
         $this->addArgument('queue', [
             'description' => 'a queue name or a list of queues seperated by spaces',
@@ -69,7 +69,7 @@ class QueueWorkerCommand extends Command
      *
      * @return void
      */
-    public function execute(): void
+    protected function execute(): void
     {
         if ($this->supportsSignals()) {
             $this->setupSignalHandler();

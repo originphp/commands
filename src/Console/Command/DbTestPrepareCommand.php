@@ -23,14 +23,14 @@ class DbTestPrepareCommand extends Command
     protected $name = 'db:test:prepare';
     protected $description = 'Prepares the test database using the current schema file';
     
-    public function initialize() : void
+    protected function initialize() : void
     {
         $this->addOption('type', [
             'description' => 'Which schema type to be loaded sql or php',
             'default' => Config::read('Schema.format'),
         ]);
     }
-    public function execute() : void
+    protected function execute() : void
     {
         $config = ConnectionManager::config('test');
         if (! $config) {

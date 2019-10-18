@@ -32,7 +32,9 @@ class DbRollbackCommand extends Command
     protected function initialize() : void
     {
         $this->addOption('connection', [
-            'description' => 'Use a different datasource','short' => 'c','default' => 'default',
+            'description' => 'Use a different connection',
+            'short' => 'c',
+            'default' => 'default',
         ]);
     }
  

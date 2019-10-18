@@ -38,10 +38,10 @@ class %name%Schema extends Schema
 }
 ';
 
-    public function initialize() : void
+    protected function initialize() : void
     {
         $this->addOption('connection', [
-            'description' => 'Use a different datasource',
+            'description' => 'Use a different connection',
             'short' => 'c',
             'default' => 'default',
         ]);
@@ -54,7 +54,7 @@ class %name%Schema extends Schema
         ]);
     }
  
-    public function execute() : void
+    protected function execute() : void
     {
         $name = $this->arguments('name') ?? 'schema';
 

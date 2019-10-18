@@ -21,19 +21,18 @@ use Origin\Model\Exception\DatasourceException;
 class DbDropCommand extends Command
 {
     protected $name = 'db:drop';
+    protected $description = 'Drops the database for the connection';
 
-    protected $description = 'Drops the database for the datasource';
-
-    public function initialize() : void
+    protected function initialize() : void
     {
         $this->addOption('connection', [
-            'description' => 'Use a different datasource',
+            'description' => 'Use a different connection',
             'short' => 'c',
             'default' => 'default',
         ]);
     }
  
-    public function execute() : void
+    protected function execute() : void
     {
         $datasource = $this->options('connection');
         $config = ConnectionManager::config($datasource);

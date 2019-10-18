@@ -21,16 +21,16 @@ use Origin\Model\Exception\DatasourceException;
 class DbCreateCommand extends Command
 {
     protected $name = 'db:create';
-    protected $description = 'Creates the database for the datasource';
+    protected $description = 'Creates the database for the connection';
     
-    public function initialize() : void
+    protected function initialize() : void
     {
         $this->addOption('connection', [
-            'description' => 'Use a different datasource','short' => 'c','default' => 'default',
+            'description' => 'Use a different connection','short' => 'c','default' => 'default',
         ]);
     }
 
-    public function execute() : void
+    protected function execute() : void
     {
         $datasource = $this->options('connection');
         $config = ConnectionManager::config($datasource);

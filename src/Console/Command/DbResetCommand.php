@@ -24,10 +24,12 @@ class DbResetCommand extends Command
 
     protected $description = 'Drops the database and then runs setup';
 
-    public function initialize() : void
+    protected function initialize() : void
     {
         $this->addOption('connection', [
-            'description' => 'Use a different datasource','short' => 'c','default' => 'default',
+            'description' => 'Use a different connection',
+            'short' => 'c',
+            'default' => 'default',
         ]);
         $this->addArgument('name', [
             'description' => 'schema_name or Plugin.schema_name',
@@ -39,7 +41,7 @@ class DbResetCommand extends Command
         ]);
     }
  
-    public function execute() : void
+    protected function execute() : void
     {
         $datasource = $this->options('connection');
         $name = $this->arguments('name') ?? 'schema';

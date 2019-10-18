@@ -23,10 +23,12 @@ class DbSetupCommand extends Command
 
     protected $description = 'Creates the database,loads schema and seeds the database';
 
-    public function initialize() : void
+    protected function initialize() : void
     {
         $this->addOption('connection', [
-            'description' => 'Use a different datasource','short' => 'c','default' => 'default',
+            'description' => 'Use a different connection',
+            'short' => 'c',
+            'default' => 'default',
         ]);
         $this->addArgument('name', [
             'description' => 'schema_name or Plugin.schema_name',
@@ -37,7 +39,7 @@ class DbSetupCommand extends Command
         ]);
     }
  
-    public function execute() : void
+    protected function execute() : void
     {
         $name = $this->arguments('name') ?? 'schema';
 

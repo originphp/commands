@@ -39,17 +39,19 @@ class DbMigrateCommand extends Command
      */
     protected $Migration = null;
 
-    public function initialize() : void
+    protected function initialize() : void
     {
         $this->addOption('connection', [
-            'description' => 'Use a different datasource','short' => 'c','default' => 'default',
+            'description' => 'Use a different connection',
+            'short' => 'c',
+            'default' => 'default',
         ]);
         $this->addArgument('version', [
             'description' => 'a target version e.g. 20190511111934','type' => 'integer'
         ]);
     }
  
-    public function execute() : void
+    protected function execute() : void
     {
         $version = $this->arguments('version');
 
