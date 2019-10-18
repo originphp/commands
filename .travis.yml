@@ -6,12 +6,14 @@ php:
   - 7.4snapshot
 dist: xenial
 env:
+  global:
+    - CODECOVERAGE=0
   matrix:
     - DB_ENGINE=mysql DB_HOST=localhost DB_USERNAME=root
     - DB_ENGINE=pgsql DB_HOST=localhost DB_USERNAME=postgres
-  include:
-      - php: 7.2
-        env: COVERAGE=true
+matrix:
+  - php: 7.2
+    env: CODECOVERAGE=1
 services:
   - mysql
   - postgresql
@@ -19,15 +21,14 @@ before_install:
   - if [ $DB_ENGINE = 'mysql' ]; then mysql -u root -e 'CREATE DATABASE commands;'; fi
   - if [ $DB_ENGINE = 'pgsql' ]; then psql -c 'CREATE DATABASE commands;' -U postgres; fi
 before_script:
-  - if [[ $COVERAGE == "" ]]; then phpenv config-rm xdebug.ini || return 0 ; fi
-  - composer install --prefer-source --no-interaction
+   - if [ $CODECOVERAGE == 0 ]; then phpenv config-rm xdebug.ini || return 0 ; fi
+   - composer install --prefer-source --no-interaction
 script:
-  - if [[ $COVERAGE == "" ]]; then vendor/bin/phpunit ; fi
-  - if [[ $COVERAGE == true ]]; then vendor/bin/phpunit --coverage-clover=clover.xml ; fi
+  - if [ $CODECOVERAGE == 0 ]; then vendor/bin/phpunit; fi
+  - if [ $CODECOVERAGE == 1 ]; then vendor/bin/phpunit --coverage-clover=clover.xml; fi
 after_script:
    - |
-      if [[ $COVERAGE == true ]]; then
-        vendor/bin/phpunit --coverage-clover coverage.xml
+      if [[ $CODECOVERAGE == 1 ]]; then
         wget https://github.com/php-coveralls/php-coveralls/releases/download/v2.1.0/php-coveralls.phar
         php php-coveralls.phar --verbose
       fi
