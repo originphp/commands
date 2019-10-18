@@ -29,7 +29,6 @@ class DbCreateCommand extends Command
             'description' => 'Use a different connection','short' => 'c','default' => 'default',
         ]);
     }
-
     protected function execute() : void
     {
         $datasource = $this->options('connection');
@@ -40,7 +39,6 @@ class DbCreateCommand extends Command
         $database = $config['database'];
         $config['database'] = null;
         $connection = ConnectionManager::create('tmp', $config); // add without database so we can connect
-
         if (in_array($database, $connection->databases())) {
             $this->io->status('error', sprintf('Database `%s` already exists', $database));
             $this->abort();

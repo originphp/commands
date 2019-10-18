@@ -37,7 +37,7 @@ class QueueWorkerCommand extends Command
     /**
      * Holds the Queue Connection
      *
-     * @var \Origin\Queue\Engine\BaseEngine;
+     * @var \Origin\Job\Engine\BaseEngine;
      */
     protected $connection = null;
 
@@ -166,7 +166,7 @@ class QueueWorkerCommand extends Command
     /**
      * Handles the actual dispatching of the job
      *
-     * @param \Origin\Queue\Job $job
+     * @param \Origin\Job\Job $job
      * @return void
      */
     protected function dispatchJob(Job $job): void

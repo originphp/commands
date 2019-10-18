@@ -14,6 +14,7 @@
 declare(strict_types = 1);
 namespace Commands\Test\Console\Command;
 
+use Origin\Core\Plugin;
 use Origin\TestSuite\OriginTestCase;
 use Origin\TestSuite\ConsoleIntegrationTestTrait;
 
@@ -40,8 +41,9 @@ class DbSeedCommandTest extends OriginTestCase
     
     public function testExecuteArgumentNameFileNotExists()
     {
-        $this->exec('db:seed --connection=test --type=sql MyPlugin.records');
+        Plugin::load('Make');
+        $this->exec('db:seed --connection=test --type=sql Make.records');
         $this->assertExitError();
-        $this->assertErrorContains('my_plugin/database/records.sql not found'); // check plugin name as well
+        $this->assertErrorContains('make/database/records.sql not found'); // check plugin name as well
     }
 }

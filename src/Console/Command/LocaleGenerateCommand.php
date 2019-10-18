@@ -75,7 +75,6 @@ class LocaleGenerateCommand extends Command
 
     protected function execute() : void
     {
-        $types = [];
         $locales = ResourceBundle::getLocales('');
         if ($this->arguments('locales')) {
             $locales = $this->arguments('locales');
@@ -115,7 +114,7 @@ class LocaleGenerateCommand extends Command
 
     private function toString(array $result)
     {
-        return "<?php\nreturn ".$this->varExport($result, true).';';
+        return "<?php\nreturn ".$this->varExport($result).';';
     }
 
     /**

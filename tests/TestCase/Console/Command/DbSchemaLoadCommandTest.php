@@ -16,6 +16,7 @@ namespace Commands\Test\Console\Command;
 
 use Origin\Model\ConnectionManager;
 use Origin\TestSuite\ConsoleIntegrationTestTrait;
+use Origin\Core\Plugin;
 
 class DbSchemaLoadCommandTest extends \PHPUnit\Framework\TestCase
 {
@@ -79,9 +80,10 @@ class DbSchemaLoadCommandTest extends \PHPUnit\Framework\TestCase
      */
     public function testExecutePluginSchemaFile()
     {
-        $this->exec('db:schema:load --connection=test --type=sql MyPlugin.pschema');
+        Plugin::load('Make');
+        $this->exec('db:schema:load --connection=test --type=sql Make.pschema');
         $this->assertExitError();
-        $this->assertErrorContains('/plugins/my_plugin/database/pschema.sql');
+        $this->assertErrorContains('/plugins/make/database/pschema.sql');
     }
 
     public function testExecuteLoadPHPSchema()

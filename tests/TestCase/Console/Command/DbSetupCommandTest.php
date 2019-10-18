@@ -14,6 +14,7 @@
 declare(strict_types = 1);
 namespace Commands\Test\Console\Command;
 
+use Origin\Core\Plugin;
 use Origin\Model\ConnectionManager;
 use Origin\TestSuite\ConsoleIntegrationTestTrait;
 
@@ -69,9 +70,10 @@ class DbSetupCommandTest extends \PHPUnit\Framework\TestCase
 
     public function testExecutePluginPath()
     {
-        $this->exec('db:setup --connection=d4 --type=sql MyPlugin.pschema');
+        Plugin::load('Make');
+        $this->exec('db:setup --connection=d4 --type=sql Make.pschema');
         $this->assertExitError();
-        $this->assertErrorContains(ROOT . '/plugins/my_plugin/database/pschema.sql');
+        $this->assertErrorContains(ROOT . '/plugins/make/database/pschema.sql');
     }
 
     /**

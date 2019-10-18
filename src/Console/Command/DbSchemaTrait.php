@@ -18,6 +18,7 @@ use Origin\Model\Connection;
 use Origin\Inflector\Inflector;
 use Origin\Model\ConnectionManager;
 use Origin\Model\Exception\DatasourceException;
+use Origin\Core\Plugin;
 
 trait DbSchemaTrait
 {
@@ -32,7 +33,7 @@ trait DbSchemaTrait
     {
         list($plugin, $file) = pluginSplit($name);
         if ($plugin) {
-            return PLUGINS . DS . Inflector::underscored($plugin) . DS . 'database' . DS .  $file . '.' . $extension;
+            return Plugin::path($plugin) . DS . 'database' . DS .  $file . '.' . $extension;
         }
 
         return DATABASE . DS . $file . '.' . $extension;
@@ -68,7 +69,7 @@ trait DbSchemaTrait
      * @param string $datasource
      * @return void
      */
-    public function loadSchema(string $filename, string $datasource)
+    public function loadSchema(string $filename, string $datasource) : void
     {
         if (! file_exists($filename)) {
             $this->throwError("File {$filename} not found");
@@ -86,15 +87,13 @@ trait DbSchemaTrait
         $count = $this->executeStatements($statements, $connection);
 
         $this->io->success(sprintf('Executed %d statements', $count));
-
-        return true;
     }
 
     /**
     * Runs a set of statments against a datasource
     *
     * @param array $statements
-    * @param Datasource $connection
+    * @param \Origin\Model\Connection $connection
     * @return integer
     */
     protected function executeStatements(array $statements, Connection $connection) : int
@@ -118,4 +117,6 @@ trait DbSchemaTrait
 
         return count($statements);
     }
+
+    abstract public function throwError(string $title, string $message = null) : void;
 }

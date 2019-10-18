@@ -23,9 +23,9 @@ class DbRollbackCommand extends Command
     protected $description = 'Rollsback the last migration';
 
     /**
-     * Undocumented variable
+     * Migration Model
      *
-     * @var \Origin\Migration\Migration
+     * @var \Origin\Model\Model
      */
     protected $Migration = null;
 
@@ -46,7 +46,7 @@ class DbRollbackCommand extends Command
         ]);
 
         $lastMigration = $this->lastMigration();
-        if ($lastMigration) {
+        if ($lastMigration !== null) {
             $this->runCommand('db:migrate', [$lastMigration - 1,'--connection' => $this->options('connection')]);
         } else {
             $this->io->warning('No migrations found');
