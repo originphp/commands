@@ -81,7 +81,7 @@ class DbSchemaLoadCommandTest extends \PHPUnit\Framework\TestCase
     public function testExecutePluginSchemaFile()
     {
         @mkdir(ROOT . 'plugins/make', 0775, true);
-        Plugin::load('Make');
+        Plugin::load('Make', ['path'=>ROOT . '/plugins/make']);
         $this->exec('db:schema:load --connection=test --type=sql Make.pschema');
         $this->assertExitError();
         $this->assertErrorContains('/plugins/make/database/pschema.sql');
