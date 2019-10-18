@@ -32,7 +32,7 @@ class QueueWorkerCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Proccesses jobs in the queue';
+    protected $description = 'Processes jobs in the queue';
 
     /**
      * Holds the Queue Connection
