@@ -25,7 +25,7 @@ before_install:
   - if [ $DB_ENGINE = 'mysql' ]; then mysql -u root -e 'CREATE DATABASE commands;'; fi
   - if [ $DB_ENGINE = 'pgsql' ]; then psql -c 'CREATE DATABASE commands;' -U postgres; fi
 before_script:
-   - if [[ $CODECOVERAGE == 0 ]]; then phpenv config-rm xdebug.ini || return 0 ; fi
+   - if [[ $CODECOVERAGE == 0 ]]; then phpenv config-rm xdebug.ini ; fi
    - composer install --prefer-source --no-interaction
 script:
   - if [[ $CODECOVERAGE == 0 ]]; then vendor/bin/phpunit; fi
