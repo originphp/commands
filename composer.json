@@ -1,7 +1,7 @@
 {
     "name": "originphp/commands",
     "description": "Console commands for the OriginPHP framework",
-    "type": "library",
+    "type": "originphp-plugin",
     "keywords": [
         "originphp",
         "commands"
