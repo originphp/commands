@@ -1,4 +1,4 @@
-# Bug in 7.3 only with phpunit and xdebug causes segfault 11 so xdebug disabled for 7.3
+# Segfault 11 bug with php 7.3,phpunit and xdebug. This caused by PHPUnit with Xdebug when generating code coverage.
 language: php
 php:
   - 7.2
@@ -22,7 +22,8 @@ before_script:
   - if [[ $COVERAGE == "" ]]; then phpenv config-rm xdebug.ini || return 0 ; fi
   - composer install --prefer-source --no-interaction
 script:
-  - vendor/bin/phpunit --coverage-clover=clover.xml
+  - if [[ $COVERAGE == "" ]]; then vendor/bin/phpunit ; fi
+  - if [[ $COVERAGE == true ]]; then vendor/bin/phpunit --coverage-clover=clover.xml ; fi
 after_script:
    - |
       if [[ $COVERAGE == true ]]; then
