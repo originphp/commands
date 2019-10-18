@@ -14,7 +14,6 @@
 declare(strict_types = 1);
 namespace Commands\Test\Console\Command;
 
-use DumpSchema;
 use Origin\Model\ConnectionManager;
 use Origin\TestSuite\OriginTestCase;
 use Origin\TestSuite\ConsoleIntegrationTestTrait;
@@ -60,8 +59,8 @@ class DbSchemaDumpCommandTest extends OriginTestCase
 
         // Check is valid object and some spot checks
         include $filename;
-        $schema = new DumpSchema();
-        $this->assertInstanceOf(DumpSchema::class, $schema);
+        $schema = new \DumpSchema();
+        $this->assertInstanceOf(\DumpSchema::class, $schema);
         $this->assertNotEmpty($schema->posts);
         $this->assertEquals('integer', $schema->posts['columns']['id']['type']);
         $this->assertNotEmpty($schema->posts['constraints']);
