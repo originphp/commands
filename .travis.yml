@@ -1,4 +1,5 @@
-# Segfault 11 bug with php 7.3,phpunit and xdebug. This caused by PHPUnit with Xdebug when generating code coverage.
+# Segfault 11 bug with php 7.3,phpunit and xdebug. This caused by PHPUnit with Xdebug building the tests before
+# the PHPUnit copyright appears.
 language: php
 php:
   - 7.2
