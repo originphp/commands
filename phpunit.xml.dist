@@ -7,7 +7,7 @@
     backupGlobals="true"
     >
     <testsuites>
-        <testsuite name="Generate Plugin Test Suite">
+        <testsuite name="OriginPHP Commands Test Suite">
             <directory>./tests/TestCase</directory>
         </testsuite>
     </testsuites>
