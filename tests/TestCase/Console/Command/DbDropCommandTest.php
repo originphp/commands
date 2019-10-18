@@ -25,25 +25,25 @@ class DbDropCommandTest extends OriginTestCase
     protected function setUp() : void
     {
         $config = ConnectionManager::config('test');
-        $config['database'] = 'dummy';
-        ConnectionManager::config('dummy', $config);
+        $config['database'] = 'd2';
+        ConnectionManager::config('d2', $config);
     }
 
     protected function tearDown() : void
     {
-        ConnectionManager::drop('dummy'); // # PostgreIssues
+        ConnectionManager::drop('d2'); // # PostgreIssues
         $ds = ConnectionManager::get('test');
-        $ds->execute('DROP DATABASE IF EXISTS dummy');
+        $ds->execute('DROP DATABASE IF EXISTS d2');
     }
 
     public function testExecute()
     {
         $ds = ConnectionManager::get('test');
-        $ds->execute('CREATE DATABASE dummy');
+        $ds->execute('CREATE DATABASE d2');
 
-        $this->exec('db:drop --connection=dummy');
+        $this->exec('db:drop --connection=d2');
         $this->assertExitSuccess();
-        $this->assertOutputContains('Database `dummy` dropped');
+        $this->assertOutputContains('Database `d2` dropped');
     }
 
     public function testExecuteInvalidDatasource()
@@ -55,8 +55,8 @@ class DbDropCommandTest extends OriginTestCase
 
     public function testExecuteDatabaseDoesNotExist()
     {
-        $this->exec('db:drop --connection=dummy');
+        $this->exec('db:drop --connection=d2');
         $this->assertExitError();
-        $this->assertOutputContains('Database `dummy` does not exist');
+        $this->assertOutputContains('Database `d2` does not exist');
     }
 }

@@ -24,15 +24,15 @@ class DbCreateCommandTest extends \PHPUnit\Framework\TestCase
     protected function setUp() : void
     {
         $config = ConnectionManager::config('test');
-        $config['database'] = 'dummy';
-        ConnectionManager::config('dummy', $config);
+        $config['database'] = 'd1';
+        ConnectionManager::config('d1', $config);
     }
 
     protected function tearDown() : void
     {
-        ConnectionManager::drop('dummy'); // # PostgreIssues
+        ConnectionManager::drop('d1'); // # PostgreIssues
         $ds = ConnectionManager::get('test');
-        $ds->execute('DROP DATABASE IF EXISTS dummy');
+        $ds->execute('DROP DATABASE IF EXISTS d1');
     }
 
     public function testExecuteMySQL()
@@ -40,10 +40,10 @@ class DbCreateCommandTest extends \PHPUnit\Framework\TestCase
         if (ConnectionManager::get('test')->engine() !== 'mysql') {
             $this->markTestSkipped('This test is for mysql');
         }
-        $this->exec('db:create --connection=dummy');
+        $this->exec('db:create --connection=d1');
 
         $this->assertExitSuccess();
-        $this->assertOutputContains('Database `dummy` created');
+        $this->assertOutputContains('Database `d1` created');
     }
 
     public function testExecutePgSQL()
@@ -51,10 +51,10 @@ class DbCreateCommandTest extends \PHPUnit\Framework\TestCase
         if (ConnectionManager::get('test')->engine() !== 'pgsql') {
             $this->markTestSkipped('This test is for pgsql');
         }
-        $this->exec('db:create --connection=dummy schema-pg');
+        $this->exec('db:create --connection=d1 schema-pg');
 
         $this->assertExitSuccess();
-        $this->assertOutputContains('Database `dummy` created');
+        $this->assertOutputContains('Database `d1` created');
     }
 
     public function testExecuteInvalidDatasource()
@@ -67,19 +67,19 @@ class DbCreateCommandTest extends \PHPUnit\Framework\TestCase
     public function testExecuteDatabaseAlreadyExists()
     {
         $ds = ConnectionManager::get('test');
-        $ds->execute('CREATE DATABASE dummy');
+        $ds->execute('CREATE DATABASE d1');
 
-        $this->exec('db:create --connection=dummy');
+        $this->exec('db:create --connection=d1');
         $this->assertExitError();
-        $this->assertOutputContains('Database `dummy` already exists');
+        $this->assertOutputContains('Database `d1` already exists');
     }
 
     public function testDatasourceException()
     {
         $config = ConnectionManager::config('test');
         $config['database'] = '<invalid-database-name>';
-        ConnectionManager::config('dummy', $config);
-        $this->exec('db:create --connection=dummy');
+        ConnectionManager::config('d1', $config);
+        $this->exec('db:create --connection=d1');
         $this->assertExitError();
         $this->assertErrorContains('DatasourceException');
     }
@@ -87,6 +87,6 @@ class DbCreateCommandTest extends \PHPUnit\Framework\TestCase
     public function shutdown() : void
     {
         $ds = ConnectionManager::get('test');
-        $ds->execute('DROP DATABASE IF EXISTS dummy');
+        $ds->execute('DROP DATABASE IF EXISTS d1');
     }
 }

@@ -24,15 +24,15 @@ class DbResetCommandTest extends \PHPUnit\Framework\TestCase
     protected function setUp() : void
     {
         $config = ConnectionManager::config('test');
-        $config['database'] = 'dummy';
-        ConnectionManager::config('dummy', $config);
+        $config['database'] = 'd3';
+        ConnectionManager::config('d3', $config);
     }
 
     protected function tearDown() : void
     {
-        ConnectionManager::drop('dummy'); // # PostgreIssues
+        ConnectionManager::drop('d3'); // # PostgreIssues
         $ds = ConnectionManager::get('test');
-        $ds->execute('DROP DATABASE IF EXISTS dummy');
+        $ds->execute('DROP DATABASE IF EXISTS d3');
     }
 
     public function testExecuteMySQL()
@@ -41,11 +41,11 @@ class DbResetCommandTest extends \PHPUnit\Framework\TestCase
             $this->markTestSkipped('This test is for mysql');
         }
         $ds = ConnectionManager::get('test');
-        $ds->execute('CREATE DATABASE dummy;');
+        $ds->execute('CREATE DATABASE d3;');
       
-        $this->exec('db:reset --connection=dummy --type=sql');
+        $this->exec('db:reset --connection=d3 --type=sql');
         $this->assertExitSuccess();
-        $this->assertOutputContains('Database `dummy` dropped');
+        $this->assertOutputContains('Database `d3` dropped');
         $this->assertOutputContains('Loading ' . ROOT . '/database/schema.sql');
         $this->assertOutputContains('Executed 2 statements');
         $this->assertOutputContains('Loading ' . ROOT . '/database/seed.sql');
@@ -58,11 +58,11 @@ class DbResetCommandTest extends \PHPUnit\Framework\TestCase
             $this->markTestSkipped('This test is for pgsql');
         }
         $ds = ConnectionManager::get('test');
-        $ds->execute('CREATE DATABASE dummy;');
+        $ds->execute('CREATE DATABASE d3;');
       
-        $this->exec('db:reset --connection=dummy --type=sql schema-pg');
+        $this->exec('db:reset --connection=d3 --type=sql schema-pg');
         $this->assertExitSuccess();
-        $this->assertOutputContains('Database `dummy` dropped');
+        $this->assertOutputContains('Database `d3` dropped');
         $this->assertOutputContains('Loading ' . ROOT . '/database/schema-pg.sql');
         $this->assertOutputContains('Executed 2 statements');
         $this->assertOutputContains('Loading ' . ROOT . '/database/seed.sql');

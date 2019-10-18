@@ -24,15 +24,15 @@ class DbSetupCommandTest extends \PHPUnit\Framework\TestCase
     protected function setUp() : void
     {
         $config = ConnectionManager::config('test');
-        $config['database'] = 'dummy';
-        ConnectionManager::config('dummy', $config);
+        $config['database'] = 'd4';
+        ConnectionManager::config('d4', $config);
     }
 
     protected function tearDown() : void
     {
-        ConnectionManager::drop('dummy'); // # PostgreIssues
+        ConnectionManager::drop('d4'); // # PostgreIssues
         $ds = ConnectionManager::get('test');
-        $ds->execute('DROP DATABASE IF EXISTS dummy');
+        $ds->execute('DROP DATABASE IF EXISTS d4');
     }
     
     public function testExecuteMySql()
@@ -41,10 +41,10 @@ class DbSetupCommandTest extends \PHPUnit\Framework\TestCase
             $this->markTestSkipped('This test is for MySQL');
         }
         
-        $this->exec('db:setup --connection=dummy --type=sql');
+        $this->exec('db:setup --connection=d4 --type=sql');
         
         $this->assertExitSuccess();
-        $this->assertOutputContains('Database `dummy` created');
+        $this->assertOutputContains('Database `d4` created');
         $this->assertOutputContains('Loading '. ROOT . '/database/schema.sql');
         $this->assertOutputContains('Executed 2 statements');
         $this->assertOutputContains('Loading '. ROOT . '/database/seed.sql');
@@ -57,10 +57,10 @@ class DbSetupCommandTest extends \PHPUnit\Framework\TestCase
             $this->markTestSkipped('This test is for PostgreSQL');
         }
         
-        $this->exec('db:setup --connection=dummy --type=sql schema-pg');
+        $this->exec('db:setup --connection=d4 --type=sql schema-pg');
       
         $this->assertExitSuccess();
-        $this->assertOutputContains('Database `dummy` created');
+        $this->assertOutputContains('Database `d4` created');
         $this->assertOutputContains('Loading '. ROOT . '/database/schema-pg.sql');
         $this->assertOutputContains('Executed 2 statements');
         $this->assertOutputContains('Loading '. ROOT . '/database/seed.sql');
@@ -69,7 +69,7 @@ class DbSetupCommandTest extends \PHPUnit\Framework\TestCase
 
     public function testExecutePluginPath()
     {
-        $this->exec('db:setup --connection=dummy --type=sql MyPlugin.pschema');
+        $this->exec('db:setup --connection=d4 --type=sql MyPlugin.pschema');
         $this->assertExitError();
         $this->assertErrorContains(ROOT . '/plugins/my_plugin/database/pschema.sql');
     }
@@ -81,7 +81,7 @@ class DbSetupCommandTest extends \PHPUnit\Framework\TestCase
      */
     public function testSetupPHP()
     {
-        $this->exec('db:setup --connection=dummy --type=php');
+        $this->exec('db:setup --connection=d4 --type=php');
         $this->assertExitSuccess();
         $expected = ConnectionManager::get('test')->engine() === 'pgsql'?9:7;
         $this->assertOutputContains('Loading '. ROOT . '/database/schema.php');
