@@ -1,3 +1,4 @@
+# Bug in 7.3 only with phpunit and xdebug causes segfault 11 so xdebug disabled for 7.3
 language: php
 php:
   - 7.2
@@ -8,6 +9,9 @@ env:
   matrix:
     - DB_ENGINE=mysql DB_HOST=localhost DB_USERNAME=root
     - DB_ENGINE=pgsql DB_HOST=localhost DB_USERNAME=postgres
+  include:
+      - php: 7.2
+        env: COVERAGE=true
 services:
   - mysql
   - postgresql
@@ -15,15 +19,17 @@ before_install:
   - if [ $DB_ENGINE = 'mysql' ]; then mysql -u root -e 'CREATE DATABASE commands;'; fi
   - if [ $DB_ENGINE = 'pgsql' ]; then psql -c 'CREATE DATABASE commands;' -U postgres; fi
 before_script:
-  - phpenv config-rm xdebug.ini || return 0
+  - if [[ $COVERAGE == "" ]]; then phpenv config-rm xdebug.ini; fi
   - composer install --prefer-source --no-interaction
 script:
   - vendor/bin/phpunit --coverage-clover=clover.xml
 after_script:
-  - wget https://github.com/php-coveralls/php-coveralls/releases/download/v2.1.0/php-coveralls.phar
-  - php php-coveralls.phar --verbose
+   - |
+      if [[ $COVERAGE == true ]]; then
+        vendor/bin/phpunit --coverage-clover coverage.xml
+        wget https://github.com/php-coveralls/php-coveralls/releases/download/v2.1.0/php-coveralls.phar
+        php php-coveralls.phar --verbose
+      fi
 cache:
   directories:
     - $HOME/.composer/cache/files
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
