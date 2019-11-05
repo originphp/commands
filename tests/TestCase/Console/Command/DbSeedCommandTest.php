@@ -42,8 +42,12 @@ class DbSeedCommandTest extends OriginTestCase
     public function testExecuteArgumentNameFileNotExists()
     {
         # Create fake plugin
-        @mkdir(sys_get_temp_dir() . '/plugins/make', 0775, true);
-        Plugin::load('Make', ['path'=>sys_get_temp_dir() . '/plugins/make']);
+        $directory = sys_get_temp_dir() . '/plugins/make';
+        if (!file_exists($directory)) {
+            mkdir(sys_get_temp_dir() . '/plugins/make', 0775, true);
+        }
+
+        Plugin::load('Make', ['path'=>$directory ]);
     
         $this->exec('db:seed --connection=test --type=sql Make.records');
         $this->assertExitError();
