@@ -22,6 +22,7 @@ class DbTestPrepareCommandTest extends \PHPUnit\Framework\TestCase
 {
     use ConsoleIntegrationTestTrait;
 
+    protected $config = [];
     protected function setUp() : void
     {
         $config = $this->config = ConnectionManager::config('test');
