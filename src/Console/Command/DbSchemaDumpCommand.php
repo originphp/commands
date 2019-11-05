@@ -26,6 +26,9 @@ class DbSchemaDumpCommand extends Command
     protected $name = 'db:schema:dump';
     protected $description = 'Dumps the database schema to file';
 
+    /**
+     * @var string
+     */
     protected $template =
     '<?php
 use Origin\Model\Schema;

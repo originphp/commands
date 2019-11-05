@@ -65,7 +65,7 @@ trait DbSchemaTrait
     /**
      * Runs the contents of a sql schema file
      *
-     * @param string $statement
+     * @param string $filename
      * @param string $datasource
      * @return void
      */

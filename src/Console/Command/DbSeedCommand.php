@@ -90,7 +90,7 @@ class DbSeedCommand extends Command
     * Runs a set of statments against a datasource
     *
     * @param array $statements
-    * @param Datasource $connection
+    * @param \Origin\Model\Connection $connection
     * @return integer
     */
     protected function executePreparedStatements(array $statements, Connection $connection) : int

@@ -108,7 +108,6 @@ class QueueWorkerCommand extends Command
     /**
      * Checks that worker is running
      *
-     * @param integer $iteration
      * @return boolean
      */
     protected function isRunning(): bool
