@@ -34,5 +34,10 @@
     "require-dev": {
         "phpunit/phpunit": "^8.0"
     },
+    "suggest": {
+        "ext-redis": "Redis",
+        "ext-imap": "Imap",
+        "ext-mailparse": "Mailparse"
+    },
     "minimum-stability": "dev"
 }

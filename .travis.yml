@@ -15,6 +15,7 @@ services:
 before_install:
   - if [ $DB_ENGINE = 'mysql' ]; then mysql -u root -e 'CREATE DATABASE commands;'; fi
   - if [ $DB_ENGINE = 'pgsql' ]; then psql -c 'CREATE DATABASE commands;' -U postgres; fi
+  - pecl install mailparse
 before_script:
   - composer install --prefer-source --no-interaction
 script:

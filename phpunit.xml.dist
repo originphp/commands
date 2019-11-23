@@ -20,7 +20,14 @@
             <env name="DB_USERNAME" value="root" />
             <env name="DB_PASSWORD" value="root" />
             <env name="DB_ENGINE" value="mysql" />
+            <env name="IMAP_HOST" value="imap.gmail.com" />
+            <env name="IMAP_PORT" value="993" />
+            <env name="IMAP_USERNAME" value="somebody@gmail.com" />
+            <env name="IMAP_PASSWORD" value="secret" />
+            <env name="IMAP_ENCRYPTION" value="ssl" />
         -->
+
+       
     </php>
     <listeners>
         <listener
