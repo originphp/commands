@@ -36,7 +36,9 @@ class MailboxDownloadTest extends OriginTestCase
     public function testInvalidAccount()
     {
         Mailbox::config('foo', [
-            'host' => 'localhost'
+            'host' => 'localhost',
+            'username' => 'nobody',
+            'password' => '1234'
         ]);
         $this->exec('mailbox:download foo -v');
         $this->assertOutputContains('ERROR');
