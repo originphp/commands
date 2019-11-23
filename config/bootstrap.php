@@ -62,7 +62,7 @@ Mailbox::config('default', [
     'port' => env('IMAP_PORT', 143),
     'username' => env('IMAP_USERNAME'),
     'password' => env('IMAP_PASSWORD'),
-    'encryption' => env('EMAIL_IMAP_ENCRYPTION'),
+    'encryption' => env('IMAP_ENCRYPTION'),
     'validateCert' => false,
     'timeout' => 5
 ]);
