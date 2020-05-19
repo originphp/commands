@@ -1,7 +1,7 @@
 <?php
 /**
  * OriginPHP Framework
- * Copyright 2018 - 2019 Jamiel Sharief.
+ * Copyright 2018 - 2020 Jamiel Sharief.
  *
  * Licensed under The MIT License
  * The above copyright notice and this permission notice shall be included in all copies or substantial
@@ -135,7 +135,7 @@ class QueueWorkerCommand extends Command
                 }
             }
 
-            if (! $ranJobs and $sleep) {
+            if (! $ranJobs && $sleep) {
                 sleep($sleep);
             }
         }
@@ -172,7 +172,7 @@ class QueueWorkerCommand extends Command
     {
         $result = true;
 
-        if ($job->timeout() and $this->supportsSignals()) {
+        if ($job->timeout() && $this->supportsSignals()) {
             $this->setTimeout($job->timeout());
         }
 
@@ -193,7 +193,7 @@ class QueueWorkerCommand extends Command
             'status' => $result ? '<pass> OK </pass>' : '<fail> FAILED </fail>',
         ]);
 
-        if ($job->timeout() and $this->supportsSignals()) {
+        if ($job->timeout() && $this->supportsSignals()) {
             $this->unsetTimeout();
         }
     }

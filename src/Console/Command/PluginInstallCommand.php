@@ -1,7 +1,7 @@
 <?php
 /**
  * OriginPHP Framework
- * Copyright 2018 - 2019 Jamiel Sharief.
+ * Copyright 2018 - 2020 Jamiel Sharief.
  *
  * Licensed under The MIT License
  * The above copyright notice and this permission notice shall be included in all copies or substantial
@@ -85,7 +85,7 @@ class PluginInstallCommand extends Command
     {
         shell_exec("git clone {$url} {$folder}");
        
-        return file_exists($folder) and $this->recursiveDelete($folder . DS . '.git');
+        return file_exists($folder) && $this->recursiveDelete($folder . DS . '.git');
     }
 
     /**

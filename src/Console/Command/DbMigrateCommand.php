@@ -1,7 +1,7 @@
 <?php
 /**
  * OriginPHP Framework
- * Copyright 2018 - 2019 Jamiel Sharief.
+ * Copyright 2018 - 2020 Jamiel Sharief.
  *
  * Licensed under The MIT License
  * The above copyright notice and this permission notice shall be included in all copies or substantial
@@ -62,7 +62,7 @@ class DbMigrateCommand extends Command
         ]);
       
         $lastMigration = $this->lastMigration();
-        if ($version === null or $version > $lastMigration) {
+        if ($version === null || $version > $lastMigration) {
             $this->migrate($version);
         } else {
             $this->rollback($version);
@@ -209,7 +209,7 @@ class DbMigrateCommand extends Command
          
             if (preg_match('/^([0-9]{14})(.*)/', $class, $matches)) {
                 $version = $matches[1];
-                if (($from and $version <= $from) or ($to and $version > $to)) {
+                if (($from && $version <= $from) || ($to && $version > $to)) {
                     continue;
                 }
                 $migrations[] = (object) [
