@@ -22,9 +22,9 @@ if (file_exists(__DIR__ . '/.env.php')) {
     }
 }
 
-Config::write('debug', env('APP_DEBUG', true));
+Config::write('App.debug', env('APP_DEBUG', true));
 Config::write('App.namespace', 'Commands');
-Config::write('Schema.format', 'php');
+Config::write('App.schemaFormat', 'php');
 
 ConnectionManager::config('default', [
     'host' => env('DB_HOST', '127.0.0.1'),

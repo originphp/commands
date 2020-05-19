@@ -35,9 +35,12 @@ class DbResetCommand extends Command
             'description' => 'schema_name or Plugin.schema_name',
         ]);
 
+        /**
+         * @deprecated Schema.format
+         */
         $this->addOption('type', [
             'description' => 'Use sql or php file',
-            'default' => Config::read('Schema.format'),
+            'default' => Config::read('App.schemaFormat') || Config::read('Schema.format'),
         ]);
     }
  

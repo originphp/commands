@@ -25,9 +25,12 @@ class DbTestPrepareCommand extends Command
     
     protected function initialize() : void
     {
+        /**
+         * @deprecated Schema.format
+         */
         $this->addOption('type', [
             'description' => 'Which schema type to be loaded sql or php',
-            'default' => Config::read('Schema.format'),
+            'default' => Config::read('App.schemaFormat') || Config::read('Schema.format'),
         ]);
     }
     protected function execute() : void

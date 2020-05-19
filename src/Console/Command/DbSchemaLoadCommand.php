@@ -35,9 +35,12 @@ class DbSchemaLoadCommand extends Command
         $this->addArgument('name', [
             'description' => 'schema_name or Plugin.schema_name',
         ]);
+        /**
+         * @deprecated Schema.format
+         */
         $this->addOption('type', [
             'description' => 'How the schema will be dumped, in sql or php',
-            'default' => Config::read('Schema.format'),
+            'default' => Config::read('App.schemaFormat') || Config::read('Schema.format'),
         ]);
     }
  

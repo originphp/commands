@@ -38,9 +38,12 @@ class DbSeedCommand extends Command
         $this->addArgument('name', [
             'description' => 'seed or Plugin.seed',
         ]);
+        /**
+         * @deprecated Schema.format
+         */
         $this->addOption('type', [
             'description' => 'Wether to use sql or php',
-            'default' => Config::read('Schema.format'),
+            'default' => Config::read('App.schemaFormat') || Config::read('Schema.format'),
         ]);
     }
  
