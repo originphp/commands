@@ -16,6 +16,8 @@ namespace Commands\Console\Command;
 
 use Origin\Console\Command\Command;
 use Origin\Model\ConnectionManager;
+use Origin\Model\Engine\SqliteEngine;
+use Origin\Model\Exception\ConnectionException;
 use Origin\Model\Exception\DatasourceException;
 
 class DbCreateCommand extends Command
@@ -29,6 +31,7 @@ class DbCreateCommand extends Command
             'description' => 'Use a different connection','short' => 'c','default' => 'default',
         ]);
     }
+
     protected function execute() : void
     {
         $datasource = $this->options('connection');
@@ -36,6 +39,22 @@ class DbCreateCommand extends Command
         if (! $config) {
             $this->throwError("{$datasource} connection not found");
         }
+
+        if ($config['engine'] === 'sqlite' || $config['className'] === SqliteEngine::class) {
+            $this->createSqliteDatabase($config);
+        } else {
+            $this->createDatabase($config);
+        }
+    }
+
+    /**
+     * Creates database for MySQL or Postgres engines
+     *
+     * @param array $config
+     * @return void
+     */
+    private function createDatabase(array $config) : void
+    {
         $database = $config['database'];
         $config['database'] = null;
         $connection = ConnectionManager::create('tmp', $config); // add without database so we can connect
@@ -51,5 +70,28 @@ class DbCreateCommand extends Command
         } catch (DatasourceException $ex) {
             $this->throwError('DatasourceException', $ex->getMessage());
         }
+    }
+
+    /**
+     * @param array $config
+     * @return void
+     */
+    private function createSqliteDatabase(array $config) : void
+    {
+        if (file_exists($config['database'])) {
+            $this->io->status('error', sprintf('Database `%s` already exists', $config['database']));
+            $this->abort();
+        }
+
+        try {
+            ConnectionManager::get($this->options('connection')); // create the db by connecting to it
+            if (file_exists($config['database'])) {
+                $this->io->status('ok', sprintf('Database `%s` created', $config['database']));
+                return;
+            }
+        } catch (ConnectionException $ex) {
+        }
+      
+        $this->throwError('DatasourceException', 'Database not created.');
     }
 }

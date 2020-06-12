@@ -31,9 +31,13 @@ class DbSetupCommandTest extends \PHPUnit\Framework\TestCase
 
     protected function tearDown() : void
     {
+        $ds = ConnectionManager::get('d4');
+        if ($this->isSqlite()) {
+            @unlink('d4');
+        } else {
+            $ds->execute('DROP DATABASE IF EXISTS d4');
+        }
         ConnectionManager::drop('d4'); // # PostgreIssues
-        $ds = ConnectionManager::get('test');
-        $ds->execute('DROP DATABASE IF EXISTS d4');
     }
     
     public function testExecuteMySql()
@@ -76,6 +80,7 @@ class DbSetupCommandTest extends \PHPUnit\Framework\TestCase
 
         $this->exec('db:setup --connection=d4 --type=sql Make.pschema');
         $this->assertExitError();
+
         $this->assertErrorContains('/plugins/make/database/pschema.sql');
     }
 
@@ -87,11 +92,21 @@ class DbSetupCommandTest extends \PHPUnit\Framework\TestCase
     public function testSetupPHP()
     {
         $this->exec('db:setup --connection=d4 --type=php');
+
         $this->assertExitSuccess();
         $expected = ConnectionManager::get('test')->engine() === 'pgsql'?9:7;
+      
         $this->assertOutputContains('Loading '. ROOT . '/database/schema.php');
         $this->assertOutputContains('Executed '.$expected.' statements');
         $this->assertOutputContains('Loading '. ROOT . '/database/seed.php');
         $this->assertOutputContains('Executed 11 statements');
+    }
+
+    /**
+     * @return boolean
+     */
+    private function isSqlite() : bool
+    {
+        return ConnectionManager::get('test')->engine() === 'sqlite';
     }
 }

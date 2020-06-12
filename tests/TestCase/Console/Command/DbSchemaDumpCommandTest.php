@@ -27,9 +27,11 @@ class DbSchemaDumpCommandTest extends OriginTestCase
     {
         $filename = DATABASE . DS . 'dump.sql';
 
+        $database = ConnectionManager::config('test')['database'];
+
         $this->exec('db:schema:dump --connection=test --type=sql dump');
         $this->assertExitSuccess();
-        $this->assertOutputContains('Dumping database `commands` schema to ' . DATABASE . DS . 'dump.sql');
+        $this->assertOutputContains('Dumping database `'.$database.'` schema to ' . DATABASE . DS . 'dump.sql');
         $this->assertTrue(file_exists($filename));
 
         $this->assertOutputContains('* posts');
@@ -40,7 +42,7 @@ class DbSchemaDumpCommandTest extends OriginTestCase
         if (ConnectionManager::get('test')->engine() === 'mysql') {
             $this->assertStringContainsString('CREATE TABLE `posts` (', $contents);
             $this->assertStringContainsString('`title` varchar(255) NOT NULL,', $contents);
-        } else { //pgsql
+        } else { //pgsql or sqlite
             $this->assertStringContainsString('CREATE TABLE "posts" (', $contents);
             $this->assertStringContainsString('"title" VARCHAR(255) NOT NULL,', $contents);
         }
@@ -51,9 +53,11 @@ class DbSchemaDumpCommandTest extends OriginTestCase
         $filename = DATABASE . DS . 'dump.php';
         $this->exec('db:schema:dump --connection=test --type=php dump');
 
+        $database = ConnectionManager::config('test')['database'];
+
         // use ds for windows based testing
         $this->assertExitSuccess();
-        $this->assertOutputContains('Dumping database `commands` schema to ' . DATABASE . DS . 'dump.php');
+        $this->assertOutputContains('Dumping database `'.$database.'` schema to ' . DATABASE . DS . 'dump.php');
         $this->assertTrue(file_exists($filename));
         $this->assertOutputContains('* posts');
 

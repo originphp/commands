@@ -21,6 +21,14 @@ class DbCreateCommandTest extends \PHPUnit\Framework\TestCase
 {
     use ConsoleIntegrationTestTrait;
 
+    /**
+     * @return boolean
+     */
+    private function isSqlite() : bool
+    {
+        return ConnectionManager::get('test')->engine() === 'sqlite';
+    }
+
     protected function setUp() : void
     {
         $config = ConnectionManager::config('test');
@@ -32,8 +40,13 @@ class DbCreateCommandTest extends \PHPUnit\Framework\TestCase
     {
         ConnectionManager::drop('d1'); // # PostgreIssues
         $ds = ConnectionManager::get('test');
-        $ds->execute('DROP DATABASE IF EXISTS d1');
+        if ($this->isSqlite()) {
+            @unlink('d1');
+        } else {
+            $ds->execute('DROP DATABASE IF EXISTS d1');
+        }
     }
+
 
     public function testExecuteMySQL()
     {
@@ -66,9 +79,13 @@ class DbCreateCommandTest extends \PHPUnit\Framework\TestCase
 
     public function testExecuteDatabaseAlreadyExists()
     {
-        $ds = ConnectionManager::get('test');
-        $ds->execute('CREATE DATABASE d1');
-
+        if ($this->isSqlite()) {
+            file_put_contents('d1', 'foo');
+        } else {
+            $ds = ConnectionManager::get('test');
+            $ds->execute('CREATE DATABASE d1');
+        }
+    
         $this->exec('db:create --connection=d1');
         $this->assertExitError();
         $this->assertOutputContains('Database `d1` already exists');
@@ -77,7 +94,13 @@ class DbCreateCommandTest extends \PHPUnit\Framework\TestCase
     public function testDatasourceException()
     {
         $config = ConnectionManager::config('test');
-        $config['database'] = '<invalid-database-name>';
+        if ($this->isSqlite()) {
+            $config['database'] = '/somewhere/that/does/not/exist/database.md';
+        } else {
+            $config['database'] = '<invalid-database-name>';
+        }
+       
+       
         ConnectionManager::config('d1', $config);
         $this->exec('db:create --connection=d1');
         $this->assertExitError();

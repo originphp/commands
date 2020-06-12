@@ -27,7 +27,7 @@
     },
     "require": {
         "php": "^7.2.0",
-        "originphp/framework": "^2.0",
+        "originphp/framework": "^2.7.1",
         "originphp/inflector": "^1.0",
         "originphp/plugin-installer": "^1.3"
     },

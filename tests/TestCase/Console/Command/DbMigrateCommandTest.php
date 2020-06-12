@@ -14,15 +14,31 @@
 declare(strict_types = 1);
 namespace Commands\Test\Console\Command;
 
+use Origin\Model\Concern\Timestampable;
 use Origin\Model\ConnectionManager;
+use Origin\Model\Model;
 use Origin\TestSuite\OriginTestCase;
 use Origin\TestSuite\ConsoleIntegrationTestTrait;
+
+class Migration extends Model
+{
+    use Timestampable;
+}
 
 class DbMigrateCommandTest extends OriginTestCase
 {
     use ConsoleIntegrationTestTrait;
 
     protected $fixtures = ['Migration'];
+
+
+    protected function setUp() : void
+    {
+        $this->Migration = $this->loadModel('Migration', [
+            'className' => Migration::class,
+            'connection' => 'test'
+        ]);
+    }
 
     protected function tearDown() : void
     {
@@ -35,7 +51,13 @@ class DbMigrateCommandTest extends OriginTestCase
     public function testMigrate()
     {
         $this->exec('db:migrate --connection=test');
- 
+       
+        $migrations = $this->Migration->find('all');
+     
+        $this->assertEquals('["DROP TABLE \"foo\""]', $migrations[0]['rollback']);
+        $this->assertEquals('["DROP TABLE \"bar\""]', $migrations[1]['rollback']);
+        $this->assertEquals('["DROP TABLE \"foobar\""]', $migrations[2]['rollback']);
+
         $this->assertExitSuccess();
         $this->assertOutputContains('Migration Complete. 3 migrations in 0 ms');
     }
@@ -85,6 +107,7 @@ class DbMigrateCommandTest extends OriginTestCase
         $ds->execute('DROP TABLE foo');
 
         $this->exec('db:migrate --connection=test 20190520033225'); // Rollback
+
         $this->assertExitError();
     }
 }

@@ -23,6 +23,7 @@ class DbTestPrepareCommandTest extends \PHPUnit\Framework\TestCase
     use ConsoleIntegrationTestTrait;
 
     protected $config = [];
+    
     protected function setUp() : void
     {
         $config = $this->config = ConnectionManager::config('test');
@@ -52,5 +53,13 @@ class DbTestPrepareCommandTest extends \PHPUnit\Framework\TestCase
         $connection->enableForeignKeyConstraints();
         ConnectionManager::drop('test');
         ConnectionManager::config('test', $this->config);
+    }
+
+    /**
+    * @return boolean
+    */
+    private function isSqlite() : bool
+    {
+        return ConnectionManager::get('test')->engine() === 'sqlite';
     }
 }

@@ -1,0 +1,438 @@
+[2020-06-12 17:53:07] application DEBUG: CREATE DATABASE <invalid-database-name>
+[2020-06-12 18:23:21] application ERROR: ConsoleException Command `cache::clear` was not found vendor/originphp/framework/src/Console/Command/Command.php:153
+[2020-06-12 18:47:34] application ERROR: Error Class 'PHPUnit\Util\VersionComparisonOperator' not found vendor/phpunit/phpunit/src/Util/Configuration.php:1054
+[2020-06-12 18:47:58] application DEBUG: DROP DATABASE IF EXISTS d1
+[2020-06-12 18:47:58] application DEBUG: DROP DATABASE IF EXISTS d1
+[2020-06-12 18:47:58] application DEBUG: DROP DATABASE IF EXISTS d1
+[2020-06-12 18:47:58] application DEBUG: CREATE DATABASE d1
+[2020-06-12 18:47:58] application DEBUG: DROP DATABASE IF EXISTS d1
+[2020-06-12 18:47:58] application DEBUG: DROP DATABASE IF EXISTS d1
+[2020-06-12 18:47:58] application DEBUG: CREATE DATABASE d2
+[2020-06-12 18:47:58] application DEBUG: DROP DATABASE IF EXISTS d2
+[2020-06-12 18:47:58] application DEBUG: DROP DATABASE IF EXISTS d2
+[2020-06-12 18:47:58] application DEBUG: DROP DATABASE IF EXISTS d2
+[2020-06-12 18:47:58] application DEBUG: CREATE TABLE "foo" (
+  "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+  "name" VARCHAR(255),
+  "description" TEXT
+)
+[2020-06-12 18:47:58] application DEBUG: DROP DATABASE IF EXISTS d3
+[2020-06-12 18:47:58] application DEBUG: DROP DATABASE IF EXISTS d3
+[2020-06-12 18:47:58] application DEBUG: CREATE TABLE `authors` (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  author_name VARCHAR(80) NOT NULL,
+  created DATETIME NOT NULL,
+  modified DATETIME NOT NULL
+)
+[2020-06-12 18:47:58] application DEBUG: DROP DATABASE IF EXISTS d4
+[2020-06-12 18:47:58] application DEBUG: DROP DATABASE IF EXISTS d4
+[2020-06-12 18:47:58] application DEBUG: DROP DATABASE IF EXISTS d4
+[2020-06-12 18:47:58] application DEBUG: DROP DATABASE IF EXISTS d4
+[2020-06-12 18:48:05] application DEBUG: DROP DATABASE IF EXISTS d1
+[2020-06-12 18:48:05] application DEBUG: DROP DATABASE IF EXISTS d1
+[2020-06-12 18:48:05] application DEBUG: DROP DATABASE IF EXISTS d1
+[2020-06-12 18:48:35] application DEBUG: DROP DATABASE IF EXISTS d1
+[2020-06-12 18:48:35] application DEBUG: DROP DATABASE IF EXISTS d1
+[2020-06-12 18:48:35] application DEBUG: DROP DATABASE IF EXISTS d1
+[2020-06-12 18:53:04] application DEBUG: CREATE DATABASE d1
+[2020-06-12 18:58:44] application ALERT: SQLSTATE[HY000] [14] unable to open database file
+[2020-06-12 19:00:57] application ALERT: SQLSTATE[HY000] [14] unable to open database file
+[2020-06-12 19:01:20] application ALERT: SQLSTATE[HY000] [14] unable to open database file
+[2020-06-12 19:01:20] application DEBUG: CREATE DATABASE d2
+[2020-06-12 19:01:20] application DEBUG: DROP DATABASE IF EXISTS d2
+[2020-06-12 19:04:03] application ALERT: SQLSTATE[HY000] [14] unable to open database file
+[2020-06-12 19:07:37] application DEBUG: CREATE TABLE "foo" (
+  "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+  "name" VARCHAR(255),
+  "description" TEXT
+)
+[2020-06-12 19:09:17] application DEBUG: CREATE TABLE "foo" (
+  "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+  "name" VARCHAR(255),
+  "description" TEXT
+)
+[2020-06-12 19:10:29] application DEBUG: CREATE TABLE "foo" (
+  "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+  "name" VARCHAR(255),
+  "description" TEXT
+)
+[2020-06-12 19:14:14] application DEBUG: CREATE TABLE "foo" (
+  "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+  "name" VARCHAR(255),
+  "description" TEXT
+)
+[2020-06-12 19:14:15] application DEBUG: CREATE TABLE "foo" (
+  "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+  "name" VARCHAR(255),
+  "description" TEXT
+)
+[2020-06-12 19:14:18] application DEBUG: CREATE TABLE "foo" (
+  "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+  "name" VARCHAR(255),
+  "description" TEXT
+)
+[2020-06-12 19:14:54] application DEBUG: CREATE TABLE "foo" (
+  "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+  "name" VARCHAR(255),
+  "description" TEXT
+)
+[2020-06-12 19:17:24] application DEBUG: CREATE TABLE "foo" (
+  "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+  "name" VARCHAR(255),
+  "description" TEXT
+)
+[2020-06-12 19:18:53] application DEBUG: CREATE TABLE "foo" (
+  "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+  "name" VARCHAR(255),
+  "description" TEXT
+)
+[2020-06-12 19:19:10] application DEBUG: CREATE TABLE "foo" (
+  "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+  "name" VARCHAR(255),
+  "description" TEXT
+)
+[2020-06-12 19:19:23] application DEBUG: CREATE TABLE "foo" (
+  "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+  "name" VARCHAR(255),
+  "description" TEXT
+)
+[2020-06-12 19:19:48] application DEBUG: CREATE TABLE "foo" (
+  "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+  "name" VARCHAR(255),
+  "description" TEXT
+)
+[2020-06-12 19:23:22] application DEBUG: CREATE TABLE "foo" (
+  "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+  "name" VARCHAR(255),
+  "description" TEXT
+)
+[2020-06-12 19:23:23] application DEBUG: DROP TABLE "foo"
+[2020-06-12 19:24:24] application DEBUG: CREATE TABLE "foo" (
+  "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+  "name" VARCHAR(255),
+  "description" TEXT
+)
+[2020-06-12 19:24:24] application DEBUG: DROP TABLE "foo"
+[2020-06-12 19:24:55] application DEBUG: CREATE TABLE "foo" (
+  "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+  "name" VARCHAR(255),
+  "description" TEXT
+)
+[2020-06-12 19:24:55] application DEBUG: DROP TABLE "foo"
+[2020-06-12 19:25:18] application DEBUG: CREATE TABLE "foo" (
+  "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+  "name" VARCHAR(255),
+  "description" TEXT
+)
+[2020-06-12 19:25:18] application DEBUG: DROP TABLE "foo"
+[2020-06-12 19:25:43] application ALERT: SQLSTATE[HY000] [14] unable to open database file
+[2020-06-12 19:25:43] application DEBUG: CREATE TABLE "foo" (
+  "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+  "name" VARCHAR(255),
+  "description" TEXT
+)
+[2020-06-12 19:25:43] application DEBUG: DROP TABLE "foo"
+[2020-06-12 19:25:43] application DEBUG: DROP DATABASE IF EXISTS d3
+[2020-06-12 19:25:43] application DEBUG: DROP DATABASE IF EXISTS d3
+[2020-06-12 19:25:43] application DEBUG: CREATE TABLE `authors` (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  author_name VARCHAR(80) NOT NULL,
+  created DATETIME NOT NULL,
+  modified DATETIME NOT NULL
+)
+[2020-06-12 19:25:44] application DEBUG: DROP DATABASE IF EXISTS d4
+[2020-06-12 19:25:44] application DEBUG: DROP DATABASE IF EXISTS d4
+[2020-06-12 19:25:44] application DEBUG: DROP DATABASE IF EXISTS d4
+[2020-06-12 19:25:44] application DEBUG: DROP DATABASE IF EXISTS d4
+[2020-06-12 19:25:46] application ERROR: Division by zero
+[2020-06-12 19:25:46] application ERROR: Division by zero
+[2020-06-12 19:25:47] application ERROR: Division by zero
+[2020-06-12 19:29:34] application ALERT: SQLSTATE[HY000] [14] unable to open database file
+[2020-06-12 19:29:34] application DEBUG: CREATE TABLE "foo" (
+  "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+  "name" VARCHAR(255),
+  "description" TEXT
+)
+[2020-06-12 19:29:34] application DEBUG: DROP TABLE "foo"
+[2020-06-12 19:29:34] application DEBUG: DROP DATABASE IF EXISTS d3
+[2020-06-12 19:29:34] application DEBUG: DROP DATABASE IF EXISTS d3
+[2020-06-12 19:31:41] application ALERT: SQLSTATE[HY000] [14] unable to open database file
+[2020-06-12 19:31:41] application DEBUG: CREATE TABLE "foo" (
+  "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+  "name" VARCHAR(255),
+  "description" TEXT
+)
+[2020-06-12 19:31:41] application DEBUG: DROP TABLE "foo"
+[2020-06-12 19:31:41] application DEBUG: DROP DATABASE IF EXISTS d3
+[2020-06-12 19:31:41] application DEBUG: DROP DATABASE IF EXISTS d3
+[2020-06-12 19:31:41] application DEBUG: CREATE TABLE `authors` (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  author_name VARCHAR(80) NOT NULL,
+  created DATETIME NOT NULL,
+  modified DATETIME NOT NULL
+)
+[2020-06-12 19:31:42] application DEBUG: DROP DATABASE IF EXISTS d4
+[2020-06-12 19:31:42] application DEBUG: DROP DATABASE IF EXISTS d4
+[2020-06-12 19:31:42] application DEBUG: DROP DATABASE IF EXISTS d4
+[2020-06-12 19:33:21] application ALERT: SQLSTATE[HY000] [14] unable to open database file
+[2020-06-12 19:33:21] application DEBUG: CREATE TABLE "foo" (
+  "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+  "name" VARCHAR(255),
+  "description" TEXT
+)
+[2020-06-12 19:33:21] application DEBUG: DROP TABLE "foo"
+[2020-06-12 19:33:21] application DEBUG: DROP DATABASE IF EXISTS d3
+[2020-06-12 19:33:21] application DEBUG: DROP DATABASE IF EXISTS d3
+[2020-06-12 19:33:21] application DEBUG: CREATE TABLE `authors` (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  author_name VARCHAR(80) NOT NULL,
+  created DATETIME NOT NULL,
+  modified DATETIME NOT NULL
+)
+[2020-06-12 19:33:22] application DEBUG: DROP DATABASE IF EXISTS d4
+[2020-06-12 19:33:22] application DEBUG: DROP DATABASE IF EXISTS d4
+[2020-06-12 19:33:22] application DEBUG: DROP DATABASE IF EXISTS d4
+[2020-06-12 19:34:01] application ALERT: SQLSTATE[HY000] [14] unable to open database file
+[2020-06-12 19:34:01] application DEBUG: CREATE TABLE "foo" (
+  "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+  "name" VARCHAR(255),
+  "description" TEXT
+)
+[2020-06-12 19:34:01] application DEBUG: DROP TABLE "foo"
+[2020-06-12 19:34:01] application DEBUG: DROP DATABASE IF EXISTS d3
+[2020-06-12 19:34:01] application DEBUG: DROP DATABASE IF EXISTS d3
+[2020-06-12 19:34:01] application DEBUG: CREATE TABLE `authors` (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  author_name VARCHAR(80) NOT NULL,
+  created DATETIME NOT NULL,
+  modified DATETIME NOT NULL
+)
+[2020-06-12 19:34:01] application DEBUG: INSERT INTO bookmarks ( id, user_id, title, url, description, category, created, modified ) VALUES ( 1000, 1000, 'Google', 'https://www.google.com', 'The most used search engine in the world.', 'Search', '2019-08-10 13:18:12', '2019-08-10 13:18:12' )
+[2020-06-12 19:34:06] application ALERT: SQLSTATE[HY000] [14] unable to open database file
+[2020-06-12 19:34:06] application DEBUG: CREATE TABLE "foo" (
+  "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+  "name" VARCHAR(255),
+  "description" TEXT
+)
+[2020-06-12 19:34:06] application DEBUG: DROP TABLE "foo"
+[2020-06-12 19:34:06] application DEBUG: DROP DATABASE IF EXISTS d3
+[2020-06-12 19:34:06] application DEBUG: DROP DATABASE IF EXISTS d3
+[2020-06-12 19:34:06] application DEBUG: CREATE TABLE `authors` (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  author_name VARCHAR(80) NOT NULL,
+  created DATETIME NOT NULL,
+  modified DATETIME NOT NULL
+)
+[2020-06-12 19:34:06] application DEBUG: INSERT INTO bookmarks ( id, user_id, title, url, description, category, created, modified ) VALUES ( 1000, 1000, 'Google', 'https://www.google.com', 'The most used search engine in the world.', 'Search', '2019-08-10 13:18:12', '2019-08-10 13:18:12' )
+[2020-06-12 19:34:52] application ALERT: SQLSTATE[HY000] [14] unable to open database file
+[2020-06-12 19:34:52] application DEBUG: CREATE TABLE "foo" (
+  "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+  "name" VARCHAR(255),
+  "description" TEXT
+)
+[2020-06-12 19:34:52] application DEBUG: DROP TABLE "foo"
+[2020-06-12 19:34:52] application DEBUG: DROP DATABASE IF EXISTS d3
+[2020-06-12 19:34:52] application DEBUG: DROP DATABASE IF EXISTS d3
+[2020-06-12 19:34:52] application DEBUG: CREATE TABLE `authors` (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  author_name VARCHAR(80) NOT NULL,
+  created DATETIME NOT NULL,
+  modified DATETIME NOT NULL
+)
+[2020-06-12 19:34:52] application DEBUG: INSERT INTO bookmarks ( id, user_id, title, url, description, category, created, modified ) VALUES ( 1000, 1000, 'Google', 'https://www.google.com', 'The most used search engine in the world.', 'Search', '2019-08-10 13:18:12', '2019-08-10 13:18:12' )
+[2020-06-12 19:35:01] application ALERT: SQLSTATE[HY000] [14] unable to open database file
+[2020-06-12 19:35:01] application DEBUG: CREATE TABLE "foo" (
+  "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+  "name" VARCHAR(255),
+  "description" TEXT
+)
+[2020-06-12 19:35:01] application DEBUG: DROP TABLE "foo"
+[2020-06-12 19:35:01] application DEBUG: DROP DATABASE IF EXISTS d3
+[2020-06-12 19:35:01] application DEBUG: DROP DATABASE IF EXISTS d3
+[2020-06-12 19:35:01] application DEBUG: CREATE TABLE `authors` (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  author_name VARCHAR(80) NOT NULL,
+  created DATETIME NOT NULL,
+  modified DATETIME NOT NULL
+)
+[2020-06-12 19:35:01] application DEBUG: INSERT INTO bookmarks ( id, user_id, title, url, description, category, created, modified ) VALUES ( 1000, 1000, 'Google', 'https://www.google.com', 'The most used search engine in the world.', 'Search', '2019-08-10 13:18:12', '2019-08-10 13:18:12' )
+[2020-06-12 19:35:16] application ALERT: SQLSTATE[HY000] [14] unable to open database file
+[2020-06-12 19:35:16] application DEBUG: CREATE TABLE "foo" (
+  "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+  "name" VARCHAR(255),
+  "description" TEXT
+)
+[2020-06-12 19:35:16] application DEBUG: DROP TABLE "foo"
+[2020-06-12 19:35:16] application DEBUG: DROP DATABASE IF EXISTS d3
+[2020-06-12 19:35:16] application DEBUG: DROP DATABASE IF EXISTS d3
+[2020-06-12 19:35:16] application DEBUG: CREATE TABLE `authors` (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  author_name VARCHAR(80) NOT NULL,
+  created DATETIME NOT NULL,
+  modified DATETIME NOT NULL
+)
+[2020-06-12 19:35:16] application DEBUG: INSERT INTO bookmarks ( id, user_id, title, url, description, category, created, modified ) VALUES ( 1000, 1000, 'Google', 'https://www.google.com', 'The most used search engine in the world.', 'Search', '2019-08-10 13:18:12', '2019-08-10 13:18:12' )
+[2020-06-12 19:35:28] application ALERT: SQLSTATE[HY000] [14] unable to open database file
+[2020-06-12 19:35:29] application DEBUG: CREATE TABLE "foo" (
+  "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+  "name" VARCHAR(255),
+  "description" TEXT
+)
+[2020-06-12 19:35:29] application DEBUG: DROP TABLE "foo"
+[2020-06-12 19:35:29] application DEBUG: DROP DATABASE IF EXISTS d3
+[2020-06-12 19:35:29] application DEBUG: DROP DATABASE IF EXISTS d3
+[2020-06-12 19:35:29] application DEBUG: CREATE TABLE `authors` (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  author_name VARCHAR(80) NOT NULL,
+  created DATETIME NOT NULL,
+  modified DATETIME NOT NULL
+)
+[2020-06-12 19:35:29] application DEBUG: INSERT INTO bookmarks ( id, user_id, title, url, description, category, created, modified ) VALUES ( 1000, 1000, 'Google', 'https://www.google.com', 'The most used search engine in the world.', 'Search', '2019-08-10 13:18:12', '2019-08-10 13:18:12' )
+[2020-06-12 19:35:40] application ALERT: SQLSTATE[HY000] [14] unable to open database file
+[2020-06-12 19:35:40] application DEBUG: CREATE TABLE "foo" (
+  "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+  "name" VARCHAR(255),
+  "description" TEXT
+)
+[2020-06-12 19:35:40] application DEBUG: DROP TABLE "foo"
+[2020-06-12 19:35:40] application DEBUG: DROP DATABASE IF EXISTS d3
+[2020-06-12 19:35:40] application DEBUG: DROP DATABASE IF EXISTS d3
+[2020-06-12 19:35:40] application DEBUG: CREATE TABLE `authors` (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  author_name VARCHAR(80) NOT NULL,
+  created DATETIME NOT NULL,
+  modified DATETIME NOT NULL
+)
+[2020-06-12 19:35:40] application DEBUG: INSERT INTO bookmarks ( id, user_id, title, url, description, category, created, modified ) VALUES ( 1000, 1000, 'Google', 'https://www.google.com', 'The most used search engine in the world.', 'Search', '2019-08-10 13:18:12', '2019-08-10 13:18:12' )
+[2020-06-12 19:41:58] application ALERT: SQLSTATE[HY000] [14] unable to open database file
+[2020-06-12 19:41:58] application DEBUG: CREATE TABLE "foo" (
+  "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+  "name" VARCHAR(255),
+  "description" TEXT
+)
+[2020-06-12 19:41:58] application DEBUG: DROP TABLE "foo"
+[2020-06-12 19:41:58] application DEBUG: DROP DATABASE IF EXISTS d3
+[2020-06-12 19:41:58] application DEBUG: DROP DATABASE IF EXISTS d3
+[2020-06-12 19:41:58] application DEBUG: CREATE TABLE `authors` (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  author_name VARCHAR(80) NOT NULL,
+  created DATETIME NOT NULL,
+  modified DATETIME NOT NULL
+)
+[2020-06-12 19:41:58] application DEBUG: INSERT INTO bookmarks ( id, user_id, title, url, description, category, created, modified ) VALUES ( 1000, 1000, 'Google', 'https://www.google.com', 'The most used search engine in the world.', 'Search', '2019-08-10 13:18:12', '2019-08-10 13:18:12' )
+[2020-06-12 19:42:01] application ERROR: Division by zero
+[2020-06-12 19:42:01] application ERROR: Division by zero
+[2020-06-12 19:42:02] application ERROR: Division by zero
+[2020-06-12 19:43:45] application DEBUG: INSERT INTO bookmarks ( id, user_id, title, url, description, category, created, modified ) VALUES ( 1000, 1000, 'Google', 'https://www.google.com', 'The most used search engine in the world.', 'Search', '2019-08-10 13:18:12', '2019-08-10 13:18:12' )
+[2020-06-12 19:44:08] application DEBUG: INSERT INTO bookmarks ( id, user_id, title, url, description, category, created, modified ) VALUES ( 1000, 1000, 'Google', 'https://www.google.com', 'The most used search engine in the world.', 'Search', '2019-08-10 13:18:12', '2019-08-10 13:18:12' )
+[2020-06-12 19:46:22] application ALERT: SQLSTATE[HY000] [14] unable to open database file
+[2020-06-12 19:46:22] application DEBUG: CREATE TABLE "foo" (
+  "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+  "name" VARCHAR(255),
+  "description" TEXT
+)
+[2020-06-12 19:46:22] application DEBUG: DROP TABLE "foo"
+[2020-06-12 19:46:22] application DEBUG: DROP DATABASE IF EXISTS d3
+[2020-06-12 19:46:22] application DEBUG: DROP DATABASE IF EXISTS d3
+[2020-06-12 19:46:22] application DEBUG: CREATE TABLE `authors` (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  author_name VARCHAR(80) NOT NULL,
+  created DATETIME NOT NULL,
+  modified DATETIME NOT NULL
+)
+[2020-06-12 19:46:22] application DEBUG: INSERT INTO bookmarks ( id, user_id, title, url, description, category, created, modified ) VALUES ( 1000, 1000, 'Google', 'https://www.google.com', 'The most used search engine in the world.', 'Search', '2019-08-10 13:18:12', '2019-08-10 13:18:12' )
+[2020-06-12 19:46:38] application ALERT: SQLSTATE[HY000] [14] unable to open database file
+[2020-06-12 19:46:38] application DEBUG: CREATE TABLE "foo" (
+  "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+  "name" VARCHAR(255),
+  "description" TEXT
+)
+[2020-06-12 19:46:38] application DEBUG: DROP TABLE "foo"
+[2020-06-12 19:46:38] application DEBUG: DROP DATABASE IF EXISTS d3
+[2020-06-12 19:46:38] application DEBUG: DROP DATABASE IF EXISTS d3
+[2020-06-12 19:46:38] application DEBUG: CREATE TABLE `authors` (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  author_name VARCHAR(80) NOT NULL,
+  created DATETIME NOT NULL,
+  modified DATETIME NOT NULL
+)
+[2020-06-12 19:46:38] application DEBUG: INSERT INTO bookmarks ( id, user_id, title, url, description, category, created, modified ) VALUES ( 1000, 1000, 'Google', 'https://www.google.com', 'The most used search engine in the world.', 'Search', '2019-08-10 13:18:12', '2019-08-10 13:18:12' )
+[2020-06-12 19:46:41] application ERROR: Division by zero
+[2020-06-12 19:46:41] application ERROR: Division by zero
+[2020-06-12 19:46:42] application ERROR: Division by zero
+[2020-06-12 19:48:01] application ALERT: SQLSTATE[HY000] [14] unable to open database file
+[2020-06-12 19:48:01] application DEBUG: CREATE TABLE "foo" (
+  "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+  "name" VARCHAR(255),
+  "description" TEXT
+)
+[2020-06-12 19:48:01] application DEBUG: DROP TABLE "foo"
+[2020-06-12 19:48:01] application DEBUG: DROP DATABASE IF EXISTS d3
+[2020-06-12 19:48:01] application DEBUG: DROP DATABASE IF EXISTS d3
+[2020-06-12 19:48:01] application DEBUG: CREATE TABLE `authors` (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  author_name VARCHAR(80) NOT NULL,
+  created DATETIME NOT NULL,
+  modified DATETIME NOT NULL
+)
+[2020-06-12 19:48:01] application DEBUG: INSERT INTO bookmarks ( id, user_id, title, url, description, category, created, modified ) VALUES ( 1000, 1000, 'Google', 'https://www.google.com', 'The most used search engine in the world.', 'Search', '2019-08-10 13:18:12', '2019-08-10 13:18:12' )
+[2020-06-12 19:48:03] application ERROR: Division by zero
+[2020-06-12 19:48:04] application ERROR: Division by zero
+[2020-06-12 19:48:05] application ERROR: Division by zero
+[2020-06-12 19:48:19] application ALERT: SQLSTATE[HY000] [14] unable to open database file
+[2020-06-12 19:48:47] application ALERT: SQLSTATE[HY000] [14] unable to open database file
+[2020-06-12 19:48:47] application DEBUG: CREATE TABLE "foo" (
+  "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+  "name" VARCHAR(255),
+  "description" TEXT
+)
+[2020-06-12 19:48:47] application DEBUG: DROP TABLE "foo"
+[2020-06-12 19:48:47] application DEBUG: DROP DATABASE IF EXISTS d3
+[2020-06-12 19:48:47] application DEBUG: DROP DATABASE IF EXISTS d3
+[2020-06-12 19:48:47] application DEBUG: CREATE TABLE `authors` (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  author_name VARCHAR(80) NOT NULL,
+  created DATETIME NOT NULL,
+  modified DATETIME NOT NULL
+)
+[2020-06-12 19:48:47] application DEBUG: INSERT INTO bookmarks ( id, user_id, title, url, description, category, created, modified ) VALUES ( 1000, 1000, 'Google', 'https://www.google.com', 'The most used search engine in the world.', 'Search', '2019-08-10 13:18:12', '2019-08-10 13:18:12' )
+[2020-06-12 19:48:50] application ERROR: Division by zero
+[2020-06-12 19:48:50] application ERROR: Division by zero
+[2020-06-12 19:48:51] application ERROR: Division by zero
+[2020-06-12 19:49:44] application ALERT: SQLSTATE[HY000] [14] unable to open database file
+[2020-06-12 19:49:44] application DEBUG: CREATE TABLE "foo" (
+  "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+  "name" VARCHAR(255),
+  "description" TEXT
+)
+[2020-06-12 19:49:44] application DEBUG: DROP TABLE "foo"
+[2020-06-12 19:49:44] application DEBUG: DROP DATABASE IF EXISTS d3
+[2020-06-12 19:49:44] application DEBUG: DROP DATABASE IF EXISTS d3
+[2020-06-12 19:49:44] application DEBUG: CREATE TABLE `authors` (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  author_name VARCHAR(80) NOT NULL,
+  created DATETIME NOT NULL,
+  modified DATETIME NOT NULL
+)
+[2020-06-12 19:49:47] application ERROR: Division by zero
+[2020-06-12 19:49:47] application ERROR: Division by zero
+[2020-06-12 19:49:48] application ERROR: Division by zero
+[2020-06-12 19:50:12] application ALERT: SQLSTATE[HY000] [14] unable to open database file
+[2020-06-12 19:50:12] application DEBUG: CREATE TABLE "foo" (
+  "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+  "name" VARCHAR(255),
+  "description" TEXT
+)
+[2020-06-12 19:50:12] application DEBUG: DROP TABLE "foo"
+[2020-06-12 19:50:12] application DEBUG: DROP DATABASE IF EXISTS d3
+[2020-06-12 19:50:12] application DEBUG: DROP DATABASE IF EXISTS d3
+[2020-06-12 19:50:12] application DEBUG: CREATE TABLE `authors` (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  author_name VARCHAR(80) NOT NULL,
+  created DATETIME NOT NULL,
+  modified DATETIME NOT NULL
+)
+[2020-06-12 19:50:12] application DEBUG: INSERT INTO bookmarks ( id, user_id, title, url, description, category, created, modified ) VALUES ( 1000, 1000, 'Google', 'https://www.google.com', 'The most used search engine in the world.', 'Search', '2019-08-10 13:18:12', '2019-08-10 13:18:12' )
+[2020-06-12 19:50:15] application ERROR: Division by zero
+[2020-06-12 19:50:15] application ERROR: Division by zero
+[2020-06-12 19:50:16] application ERROR: Division by zero

@@ -16,6 +16,7 @@ namespace Commands\Console\Command;
 
 use Origin\Console\Command\Command;
 use Origin\Model\ConnectionManager;
+use Origin\Model\Engine\SqliteEngine;
 use Origin\Model\Exception\DatasourceException;
 
 class DbDropCommand extends Command
@@ -39,7 +40,26 @@ class DbDropCommand extends Command
         if (! $config) {
             $this->throwError("{$datasource} connection not found");
         }
-     
+
+        if ($config['engine'] === 'sqlite' || $config['className'] === SqliteEngine::class) {
+            $this->dropSqliteDatabase($config);
+        } else {
+            $this->dropDatabase($config);
+        }
+        
+        $this->runCommand('cache:clear', ['--quiet']);
+    }
+
+
+
+    /**
+     * Drops database for MySQL or Postgres engines
+     *
+     * @param array $config
+     * @return void
+     */
+    private function dropDatabase(array $config) : void
+    {
         // Create tmp Connection
         $database = $config['database'];
         $config['database'] = null;
@@ -55,6 +75,24 @@ class DbDropCommand extends Command
             $this->io->status('ok', sprintf('Database `%s` dropped', $database));
         } catch (DatasourceException $ex) {
             $this->throwError('DatasourceException', $ex->getMessage());
+        }
+    }
+
+    /**
+     * @param array $config
+     * @return void
+     */
+    private function dropSqliteDatabase(array $config) : void
+    {
+        if (!file_exists($config['database'])) {
+            $this->io->status('error', sprintf('Database `%s` does not exist', $config['database']));
+            $this->abort();
+        }
+
+        if (unlink($config['database'])) {
+            $this->io->status('ok', sprintf('Database `%s` dropped', $config['database']));
+        } else {
+            $this->throwError('DatasourceException', 'Unable to drop the database.');
         }
     }
 }

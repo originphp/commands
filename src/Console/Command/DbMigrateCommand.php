@@ -67,6 +67,8 @@ class DbMigrateCommand extends Command
         } else {
             $this->rollback($version);
         }
+
+        $this->runCommand('cache:clear', ['--quiet']);
     }
 
     /**
@@ -92,7 +94,7 @@ class DbMigrateCommand extends Command
                 $migration = $this->createMigration($object);
 
                 $this->verboseStatements($migration->start());
-                // pr($migration->reverseStatements());
+             
                 $entity = $this->Migration->new([
                     'version' => $object->version,
                     'rollback' => json_encode($migration->reverseStatements()),
@@ -138,6 +140,7 @@ class DbMigrateCommand extends Command
                 if ($entity->rollback) {
                     $reverse = json_decode($entity->rollback, true);
                 }
+                
                 $this->verboseStatements($migration->rollback($reverse));
               
                 $this->Migration->delete($entity);
@@ -172,7 +175,7 @@ class DbMigrateCommand extends Command
     {
         $lastMigration = $this->Migration->find('first', ['order' => 'version DESC']);
         if ($lastMigration) {
-            return $lastMigration->version;
+            return (int) $lastMigration->version;
         }
 
         return null;

@@ -60,6 +60,8 @@ class DbSchemaLoadCommand extends Command
         } else {
             $this->loadSchema($filename, $datasource);
         }
+
+        $this->runCommand('cache:clear', ['--quiet']);
     }
 
     public function loadPhpSchema(string $name, string $filename, string $datasource) : void

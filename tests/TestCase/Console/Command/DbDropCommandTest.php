@@ -22,6 +22,14 @@ class DbDropCommandTest extends OriginTestCase
 {
     use ConsoleIntegrationTestTrait;
 
+    /**
+     * @return boolean
+     */
+    private function isSqlite() : bool
+    {
+        return ConnectionManager::get('test')->engine() === 'sqlite';
+    }
+
     protected function setUp() : void
     {
         $config = ConnectionManager::config('test');
@@ -33,13 +41,23 @@ class DbDropCommandTest extends OriginTestCase
     {
         ConnectionManager::drop('d2'); // # PostgreIssues
         $ds = ConnectionManager::get('test');
-        $ds->execute('DROP DATABASE IF EXISTS d2');
+        if ($this->isSqlite()) {
+            @unlink('d2');
+        } else {
+            $ds->execute('DROP DATABASE IF EXISTS d2');
+        }
     }
 
     public function testExecute()
     {
         $ds = ConnectionManager::get('test');
-        $ds->execute('CREATE DATABASE d2');
+
+        if ($this->isSqlite()) {
+            file_put_contents('d2', 'foo');
+        } else {
+            $ds = ConnectionManager::get('test');
+            $ds->execute('CREATE DATABASE d2');
+        }
 
         $this->exec('db:drop --connection=d2');
         $this->assertExitSuccess();

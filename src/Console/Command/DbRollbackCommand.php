@@ -62,7 +62,7 @@ class DbRollbackCommand extends Command
     {
         $lastMigration = $this->Migration->find('first', ['order' => 'version DESC']);
         if ($lastMigration) {
-            return $lastMigration->version;
+            return (int) $lastMigration->version; // casting due to sqlite
         }
 
         return null;

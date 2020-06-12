@@ -28,7 +28,7 @@ Config::write('App.schemaFormat', 'php');
 
 ConnectionManager::config('default', [
     'host' => env('DB_HOST', '127.0.0.1'),
-    'database' => 'commands',
+    'database' => env('DB_DATABASE'),
     'username' => env('DB_USERNAME'),
     'password' => env('DB_PASSWORD'),
     'engine' => env('DB_ENGINE', 'mysql')
@@ -36,7 +36,7 @@ ConnectionManager::config('default', [
 
 ConnectionManager::config('test', [
     'host' => env('DB_HOST', '127.0.0.1'),
-    'database' => 'commands',
+    'database' => env('DB_DATABASE'),
     'username' => env('DB_USERNAME'),
     'password' => env('DB_PASSWORD'),
     'engine' => env('DB_ENGINE', 'mysql')
