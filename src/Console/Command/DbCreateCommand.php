@@ -40,7 +40,7 @@ class DbCreateCommand extends Command
             $this->throwError("{$datasource} connection not found");
         }
 
-        if ($config['engine'] === 'sqlite' || $config['className'] === SqliteEngine::class) {
+        if ((isset($config['engine']) && $config['engine'] === 'sqlite') || (isset($config['className']) && $config['className'] === SqliteEngine::class)) {
             $this->createSqliteDatabase($config);
         } else {
             $this->createDatabase($config);

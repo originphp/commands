@@ -40,8 +40,7 @@ class DbDropCommand extends Command
         if (! $config) {
             $this->throwError("{$datasource} connection not found");
         }
-
-        if ($config['engine'] === 'sqlite' || $config['className'] === SqliteEngine::class) {
+        if ((isset($config['engine']) && $config['engine'] === 'sqlite') || (isset($config['className']) && $config['className'] === SqliteEngine::class)) {
             $this->dropSqliteDatabase($config);
         } else {
             $this->dropDatabase($config);
