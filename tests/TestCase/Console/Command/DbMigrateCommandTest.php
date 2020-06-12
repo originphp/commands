@@ -54,9 +54,9 @@ class DbMigrateCommandTest extends OriginTestCase
        
         $migrations = $this->Migration->find('all');
      
-        $this->assertEquals('["DROP TABLE \"foo\""]', $migrations[0]['rollback']);
-        $this->assertEquals('["DROP TABLE \"bar\""]', $migrations[1]['rollback']);
-        $this->assertEquals('["DROP TABLE \"foobar\""]', $migrations[2]['rollback']);
+        $this->assertEquals('["DROP TABLE', $migrations[0]['rollback']);
+        $this->assertEquals('["DROP TABLE', $migrations[1]['rollback']);
+        $this->assertEquals('["DROP TABLE', $migrations[2]['rollback']);
 
         $this->assertExitSuccess();
         $this->assertOutputContains('Migration Complete. 3 migrations in 0 ms');
