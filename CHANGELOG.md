@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Added support for SQlite
+- Added cache clearing after database activities such as migrations
 
 ## [1.3.0] - 2020-05-10
 
