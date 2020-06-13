@@ -35,9 +35,10 @@ class DbSetupCommandTest extends \PHPUnit\Framework\TestCase
         if ($this->isSqlite()) {
             @unlink('d4');
         } else {
+            ConnectionManager::drop('d4'); // # PostgreIssues
+            $ds = ConnectionManager::get('test');
             $ds->execute('DROP DATABASE IF EXISTS d4');
         }
-        ConnectionManager::drop('d4'); // # PostgreIssues
     }
     
     public function testExecuteMySql()
