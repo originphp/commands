@@ -79,8 +79,6 @@ class DbCreateCommandTest extends \PHPUnit\Framework\TestCase
 
         $this->assertExitSuccess();
         $this->assertOutputContains('Database `d1` created');
-
-        debug($this->output());
     }
 
 
