@@ -107,18 +107,62 @@ class DbSetupCommandTest extends \PHPUnit\Framework\TestCase
      *
      * @return void
      */
-    public function testSetupPHP()
+    public function testSetupPHPSqlite()
     {
-        $this->exec('db:setup --connection=d4 --type=php');
-        debug($this->error());
-        $this->assertExitSuccess();
-        $expected = ConnectionManager::get('test')->engine() === 'pgsql' ?  9 : 4;
+        if (ConnectionManager::get('test')->engine() !== 'sqlite') {
+            $this->markTestSkipped('This test is for SQLite');
+        }
 
+        $this->exec('db:setup --connection=d4 --type=php');
+       
+        $this->assertExitSuccess();
+  
         $this->assertOutputContains('Loading '. ROOT . '/database/schema.php');
-        $this->assertOutputContains('Executed '.$expected.' statements');
+        $this->assertOutputContains('Executed 6 statements');
         $this->assertOutputContains('Loading '. ROOT . '/database/seed.php');
         $this->assertOutputContains('Executed 11 statements');
     }
+
+    /**
+     * Load both schema and seed from php.
+     *
+     * @return void
+     */
+    public function testSetupPHPPgsql()
+    {
+        if (ConnectionManager::get('test')->engine() !== 'pgsql') {
+            $this->markTestSkipped('This test is for Postgres');
+        }
+        $this->exec('db:setup --connection=d4 --type=php');
+       
+        $this->assertExitSuccess();
+
+        $this->assertOutputContains('Loading '. ROOT . '/database/schema.php');
+        $this->assertOutputContains('Executed 9 statements');
+        $this->assertOutputContains('Loading '. ROOT . '/database/seed.php');
+        $this->assertOutputContains('Executed 11 statements');
+    }
+
+    /**
+     * Load both schema and seed from php.
+     *
+     * @return void
+     */
+    public function testSetupPHPMysql()
+    {
+        if (ConnectionManager::get('test')->engine() !== 'mysql') {
+            $this->markTestSkipped('This test is for Mysql');
+        }
+        $this->exec('db:setup --connection=d4 --type=php');
+       
+        $this->assertExitSuccess();
+
+        $this->assertOutputContains('Loading '. ROOT . '/database/schema.php');
+        $this->assertOutputContains('Executed 4 statements');
+        $this->assertOutputContains('Loading '. ROOT . '/database/seed.php');
+        $this->assertOutputContains('Executed 11 statements');
+    }
+
 
     /**
      * @return boolean
