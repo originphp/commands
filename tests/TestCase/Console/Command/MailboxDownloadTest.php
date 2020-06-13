@@ -35,6 +35,9 @@ class MailboxDownloadTest extends OriginTestCase
 
     public function testInvalidAccount()
     {
+        if (!extension_loaded('imap')) {
+            $this->markTestSkipped();
+        }
         Mailbox::config('foo', [
             'host' => 'localhost',
             'username' => 'nobody',
@@ -45,6 +48,9 @@ class MailboxDownloadTest extends OriginTestCase
     }
     public function testDownloadMessages()
     {
+        if (!extension_loaded('imap')) {
+            $this->markTestSkipped();
+        }
         $this->exec('mailbox:download -v');
         $this->assertExitSuccess();
         $this->assertOutputRegExp('/Downloaded ([0-9]+) message/');
