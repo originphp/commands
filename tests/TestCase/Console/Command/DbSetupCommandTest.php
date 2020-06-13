@@ -95,8 +95,8 @@ class DbSetupCommandTest extends \PHPUnit\Framework\TestCase
         $this->exec('db:setup --connection=d4 --type=php');
 
         $this->assertExitSuccess();
-        $expected = ConnectionManager::get('test')->engine() === 'pgsql'?9:7;
-      
+        $expected = ConnectionManager::get('test')->engine() === 'pgsql' ?  9 : 4;
+
         $this->assertOutputContains('Loading '. ROOT . '/database/schema.php');
         $this->assertOutputContains('Executed '.$expected.' statements');
         $this->assertOutputContains('Loading '. ROOT . '/database/seed.php');
