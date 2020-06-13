@@ -45,7 +45,6 @@ class DbTestPrepareCommandTest extends \PHPUnit\Framework\TestCase
          */
         
         if ($this->isSqlite()) {
-            ConnectionManager::drop('test');
             @unlink(ROOT . '/test123');
         } else {
             $connection = ConnectionManager::get('test');
@@ -55,9 +54,9 @@ class DbTestPrepareCommandTest extends \PHPUnit\Framework\TestCase
                 $connection->execute($sql);
             }
             $connection->enableForeignKeyConstraints();
-            ConnectionManager::drop('test');
-            ConnectionManager::config('test', $this->config);
         }
+        ConnectionManager::drop('test');
+        ConnectionManager::config('test', $this->config);
     }
 
     /**
