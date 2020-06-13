@@ -44,15 +44,20 @@ class DbTestPrepareCommandTest extends \PHPUnit\Framework\TestCase
          * Clean up tables
          */
         
-        $connection = ConnectionManager::get('test');
-        $connection->disableForeignKeyConstraints();
-        foreach (['bookmarks', 'bookmarks_tags','tags','users'] as $table) {
-            $sql = $connection->adapter()->dropTableSql($table, ['ifExists' => true]);
-            $connection->execute($sql);
+        if ($this->isSqlite()) {
+            ConnectionManager::drop('test');
+            @unlink(ROOT . '/test123');
+        } else {
+            $connection = ConnectionManager::get('test');
+            $connection->disableForeignKeyConstraints();
+            foreach (['bookmarks', 'bookmarks_tags','tags','users'] as $table) {
+                $sql = $connection->adapter()->dropTableSql($table, ['ifExists' => true]);
+                $connection->execute($sql);
+            }
+            $connection->enableForeignKeyConstraints();
+            ConnectionManager::drop('test');
+            ConnectionManager::config('test', $this->config);
         }
-        $connection->enableForeignKeyConstraints();
-        ConnectionManager::drop('test');
-        ConnectionManager::config('test', $this->config);
     }
 
     /**

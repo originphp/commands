@@ -26,16 +26,16 @@ class DbSetupCommandTest extends \PHPUnit\Framework\TestCase
     {
         $config = ConnectionManager::config('test');
         $config['database'] = 'd4';
+        
         ConnectionManager::config('d4', $config);
     }
 
     protected function tearDown() : void
     {
-        $ds = ConnectionManager::get('d4');
+        ConnectionManager::drop('d4'); // Postgres & sqlite issues
         if ($this->isSqlite()) {
-            @unlink('d4');
+            @unlink(ROOT . '/d4');
         } else {
-            ConnectionManager::drop('d4'); // # PostgreIssues
             $ds = ConnectionManager::get('test');
             $ds->execute('DROP DATABASE IF EXISTS d4');
         }
@@ -73,6 +73,22 @@ class DbSetupCommandTest extends \PHPUnit\Framework\TestCase
         $this->assertOutputContains('Executed 3 statements');
     }
 
+    public function testExecuteSqlite()
+    {
+        if (ConnectionManager::get('test')->engine() !== 'sqlite') {
+            $this->markTestSkipped('This test is for SQLite');
+        }
+        
+        $this->exec('db:setup --connection=d4 --type=sql');
+        
+        $this->assertExitSuccess();
+        $this->assertOutputContains('Database `d4` created');
+        $this->assertOutputContains('Loading '. ROOT . '/database/schema.sql');
+        $this->assertOutputContains('Executed 2 statements');
+        $this->assertOutputContains('Loading '. ROOT . '/database/seed.sql');
+        $this->assertOutputContains('Executed 3 statements');
+    }
+
     public function testExecutePluginPath()
     {
         # Create fake plugin
@@ -80,6 +96,7 @@ class DbSetupCommandTest extends \PHPUnit\Framework\TestCase
         Plugin::load('Make', ['path'=>sys_get_temp_dir() . '/plugins/make']);
 
         $this->exec('db:setup --connection=d4 --type=sql Make.pschema');
+
         $this->assertExitError();
 
         $this->assertErrorContains('/plugins/make/database/pschema.sql');
@@ -93,7 +110,7 @@ class DbSetupCommandTest extends \PHPUnit\Framework\TestCase
     public function testSetupPHP()
     {
         $this->exec('db:setup --connection=d4 --type=php');
-
+        debug($this->error());
         $this->assertExitSuccess();
         $expected = ConnectionManager::get('test')->engine() === 'pgsql' ?  9 : 4;
 

@@ -39,11 +39,11 @@ class DbDropCommandTest extends OriginTestCase
 
     protected function tearDown() : void
     {
-        ConnectionManager::drop('d2'); // # PostgreIssues
-        $ds = ConnectionManager::get('test');
+        ConnectionManager::drop('d2'); // Postgres & SQLite issues
         if ($this->isSqlite()) {
-            @unlink('d2');
+            @unlink(ROOT . '/d2');
         } else {
+            $ds = ConnectionManager::get('test');
             $ds->execute('DROP DATABASE IF EXISTS d2');
         }
     }
