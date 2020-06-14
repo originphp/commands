@@ -106,14 +106,19 @@ trait DbSchemaTrait
     protected function processStatements(Connection $connection, array $statements) : void
     {
         foreach ($statements  as $statement) {
-            try {
-                $connection->execute($statement);
-            } catch (DatasourceException $ex) {
-                $this->io->status('error', str_replace("\n", '', $statement));
-                $this->throwError('Executing query failed', $ex->getMessage());
-            }
-            $this->io->status('ok', str_replace("\n", '', $statement));
+            $this->processStatement($connection, $statement);
         }
+    }
+
+    private function processStatement(Connection $connection, string $statement) : void
+    {
+        try {
+            $connection->execute($statement);
+        } catch (DatasourceException $ex) {
+            $this->io->status('error', str_replace("\n", '', $statement));
+            $this->throwError('Executing query failed', $ex->getMessage());
+        }
+        $this->io->status('ok', str_replace("\n", '', $statement));
     }
 
     abstract public function throwError(string $title, string $message = null) : void;
