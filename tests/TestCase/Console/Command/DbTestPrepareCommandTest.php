@@ -18,6 +18,9 @@ use Origin\Model\ConnectionManager;
 
 use Origin\TestSuite\ConsoleIntegrationTestTrait;
 
+/**
+ * This is test is causing problems when run in group, have not identified the issue yet.
+ */
 class DbTestPrepareCommandTest extends \PHPUnit\Framework\TestCase
 {
     use ConsoleIntegrationTestTrait;
@@ -45,15 +48,16 @@ class DbTestPrepareCommandTest extends \PHPUnit\Framework\TestCase
          */
         
         if ($this->isSqlite()) {
-            @unlink(ROOT . '/test123');
+            @unlink(ROOT . '/tmp123');
+            @unlink(ROOT . '/commands.sqlite3');
         } else {
             $connection = ConnectionManager::get('test');
-            $connection->disableForeignKeyConstraints();
-            foreach (['bookmarks', 'bookmarks_tags','tags','users'] as $table) {
-                $sql = $connection->adapter()->dropTableSql($table, ['ifExists' => true]);
-                $connection->execute($sql);
-            }
-            $connection->enableForeignKeyConstraints();
+            $connection->transaction(function ($connection) {
+                foreach (['bookmarks', 'bookmarks_tags','tags','users'] as $table) {
+                    $sql = $connection->adapter()->dropTableSql($table, ['ifExists' => true]);
+                    $connection->execute($sql);
+                }
+            }, true);
         }
         ConnectionManager::drop('test');
         ConnectionManager::config('test', $this->config);
