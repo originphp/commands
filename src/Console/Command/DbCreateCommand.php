@@ -86,16 +86,17 @@ class DbCreateCommand extends Command
             $this->abort();
         }
 
+        $error = sprintf('Database `%s` not created.', $database);
+   
         try {
             ConnectionManager::get($this->options('connection')); // create the db by connecting to it
-          
-            if (file_exists($config['database'])) {
-                $this->io->status('ok', sprintf('Database `%s` created', $database));
-                return;
-            }
-        } catch (ConnectionException $ex) {
+            $this->io->status('ok', sprintf('Database `%s` created', $database));
+            return;
+        } catch (Exception $exception) {
+            $error = $exception->getMessage();
         }
       
-        $this->throwError('DatasourceException', 'Database not created.');
+        
+        $this->throwError('DatasourceException', $error);
     }
 }
