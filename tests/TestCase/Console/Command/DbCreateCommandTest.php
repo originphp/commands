@@ -38,11 +38,11 @@ class DbCreateCommandTest extends \PHPUnit\Framework\TestCase
 
     protected function tearDown() : void
     {
-        ConnectionManager::drop('d1'); // # PostgreIssues
-        $ds = ConnectionManager::get('test');
+        ConnectionManager::drop('d1'); // Postgres & SQLite issues
         if ($this->isSqlite()) {
-            @unlink('d1');
+            @unlink(ROOT . '/d1');
         } else {
+            $ds = ConnectionManager::get('test');
             $ds->execute('DROP DATABASE IF EXISTS d1');
         }
     }
@@ -69,6 +69,18 @@ class DbCreateCommandTest extends \PHPUnit\Framework\TestCase
         $this->assertExitSuccess();
         $this->assertOutputContains('Database `d1` created');
     }
+
+    public function testExecutSqlite()
+    {
+        if (ConnectionManager::get('test')->engine() !== 'sqlite') {
+            $this->markTestSkipped('This test is for sqlite');
+        }
+        $this->exec('db:create --connection=d1');
+
+        $this->assertExitSuccess();
+        $this->assertOutputContains('Database `d1` created');
+    }
+
 
     public function testExecuteInvalidDatasource()
     {

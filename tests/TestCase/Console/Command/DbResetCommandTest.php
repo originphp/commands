@@ -28,11 +28,23 @@ class DbResetCommandTest extends \PHPUnit\Framework\TestCase
         ConnectionManager::config('d3', $config);
     }
 
+    /**
+    * @return boolean
+    */
+    private function isSqlite() : bool
+    {
+        return ConnectionManager::get('test')->engine() === 'sqlite';
+    }
+
     protected function tearDown() : void
     {
-        ConnectionManager::drop('d3'); // # PostgreIssues
-        $ds = ConnectionManager::get('test');
-        $ds->execute('DROP DATABASE IF EXISTS d3');
+        ConnectionManager::drop('d3'); // Postgres & SQLite issues
+        if ($this->isSqlite()) {
+            @unlink(ROOT . '/d3');
+        } else {
+            $ds = ConnectionManager::get('test');
+            $ds->execute('DROP DATABASE IF EXISTS d3');
+        }
     }
 
     public function testExecuteMySQL()

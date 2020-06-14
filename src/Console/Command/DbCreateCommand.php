@@ -14,6 +14,7 @@
 declare(strict_types = 1);
 namespace Commands\Console\Command;
 
+use Exception;
 use Origin\Console\Command\Command;
 use Origin\Model\ConnectionManager;
 use Origin\Model\Engine\SqliteEngine;
@@ -78,20 +79,24 @@ class DbCreateCommand extends Command
      */
     private function createSqliteDatabase(array $config) : void
     {
+        $database = str_replace(ROOT . '/', '', $config['database']);
+
         if (file_exists($config['database'])) {
-            $this->io->status('error', sprintf('Database `%s` already exists', $config['database']));
+            $this->io->status('error', sprintf('Database `%s` already exists', $database));
             $this->abort();
         }
 
+        $error = sprintf('Database `%s` not created.', $database);
+   
         try {
             ConnectionManager::get($this->options('connection')); // create the db by connecting to it
-            if (file_exists($config['database'])) {
-                $this->io->status('ok', sprintf('Database `%s` created', $config['database']));
-                return;
-            }
-        } catch (ConnectionException $ex) {
+            $this->io->status('ok', sprintf('Database `%s` created', $database));
+            return;
+        } catch (Exception $exception) {
+            $error = $exception->getMessage();
         }
       
-        $this->throwError('DatasourceException', 'Database not created.');
+        
+        $this->throwError('DatasourceException', $error);
     }
 }

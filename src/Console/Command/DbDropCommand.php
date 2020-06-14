@@ -83,13 +83,15 @@ class DbDropCommand extends Command
      */
     private function dropSqliteDatabase(array $config) : void
     {
+        $database = str_replace(ROOT . '/', '', $config['database']);
+
         if (!file_exists($config['database'])) {
-            $this->io->status('error', sprintf('Database `%s` does not exist', $config['database']));
+            $this->io->status('error', sprintf('Database `%s` does not exist', $database));
             $this->abort();
         }
 
         if (unlink($config['database'])) {
-            $this->io->status('ok', sprintf('Database `%s` dropped', $config['database']));
+            $this->io->status('ok', sprintf('Database `%s` dropped', $database));
         } else {
             $this->throwError('DatasourceException', 'Unable to drop the database.');
         }

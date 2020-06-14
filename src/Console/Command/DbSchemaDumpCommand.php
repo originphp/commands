@@ -74,8 +74,10 @@ class %name%Schema extends Schema
         if (! in_array($type, ['sql','php'])) {
             $this->throwError(sprintf('The type `%s` is invalid', $type));
         }
-        $database = ConnectionManager::get($datasource)->database();
+
         $filename = $this->schemaFilename($name, $type);
+        $database = str_replace(ROOT . '/', '', ConnectionManager::get($datasource)->database());
+
         $this->io->info("Dumping database `{$database}` schema to {$filename}");
         if ($type === 'sql') {
             $this->dump($datasource, $name);

@@ -98,25 +98,41 @@ class DbSeedCommand extends Command
     */
     protected function executePreparedStatements(array $statements, Connection $connection) : int
     {
-        $connection->begin();
-        $connection->disableForeignKeyConstraints();
-
-        foreach ($statements  as $statement) {
-            try {
-                $sql = $this->unprepare($statement[0], $statement[1]);
-                $connection->execute($statement[0], $statement[1]);
-
-                $this->io->status('ok', $sql);
-            } catch (DatasourceException $ex) {
-                $connection->rollback();
-                $this->io->status('error', $sql);
-                $this->throwError('Executing query failed', $ex->getMessage());
-            }
-        }
-        $connection->enableForeignKeyConstraints();
-        $connection->commit();
-      
+        $connection->transaction(function ($connection) use ($statements) {
+            $this->processPreparedStatements($connection, $statements);
+        }, true);
+        
         return count($statements);
+    }
+    
+    /**
+     * @param \Origin\Model\Connection $connection
+     * @param array $statements
+     * @return void
+     */
+    protected function processPreparedStatements(Connection $connection, array $statements) : void
+    {
+        foreach ($statements as $statement) {
+            $this->processPreparedStatement($connection, $statement);
+        }
+    }
+    
+    /**
+     * @param \Origin\Model\Connection $connection
+     * @param array $statements
+     * @return void
+     */
+    protected function processPreparedStatement(Connection $connection, array $statement) : void
+    {
+        try {
+            $sql = $this->unprepare($statement[0], $statement[1]);
+            $connection->execute($statement[0], $statement[1]);
+
+            $this->io->status('ok', $sql);
+        } catch (DatasourceException $ex) {
+            $this->io->status('error', $sql);
+            $this->throwError('Executing query failed', $ex->getMessage());
+        }
     }
 
     /**
