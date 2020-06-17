@@ -18,7 +18,6 @@ use Exception;
 use Origin\Console\Command\Command;
 use Origin\Model\ConnectionManager;
 use Origin\Model\Engine\SqliteEngine;
-use Origin\Model\Exception\ConnectionException;
 use Origin\Model\Exception\DatasourceException;
 
 class DbCreateCommand extends Command
@@ -26,14 +25,14 @@ class DbCreateCommand extends Command
     protected $name = 'db:create';
     protected $description = 'Creates the database for the connection';
     
-    protected function initialize() : void
+    protected function initialize(): void
     {
         $this->addOption('connection', [
             'description' => 'Use a different connection','short' => 'c','default' => 'default',
         ]);
     }
 
-    protected function execute() : void
+    protected function execute(): void
     {
         $datasource = $this->options('connection');
         $config = ConnectionManager::config($datasource);
@@ -54,7 +53,7 @@ class DbCreateCommand extends Command
      * @param array $config
      * @return void
      */
-    private function createDatabase(array $config) : void
+    private function createDatabase(array $config): void
     {
         $database = $config['database'];
         $config['database'] = null;
@@ -77,7 +76,7 @@ class DbCreateCommand extends Command
      * @param array $config
      * @return void
      */
-    private function createSqliteDatabase(array $config) : void
+    private function createSqliteDatabase(array $config): void
     {
         $database = str_replace(ROOT . '/', '', $config['database']);
 
@@ -91,12 +90,12 @@ class DbCreateCommand extends Command
         try {
             ConnectionManager::get($this->options('connection')); // create the db by connecting to it
             $this->io->status('ok', sprintf('Database `%s` created', $database));
+
             return;
         } catch (Exception $exception) {
             $error = $exception->getMessage();
         }
       
-        
         $this->throwError('DatasourceException', $error);
     }
 }

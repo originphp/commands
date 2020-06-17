@@ -65,7 +65,7 @@ class LocaleGenerateCommand extends Command
         'mm' => 'i',
     ];
 
-    protected function initialize() : void
+    protected function initialize(): void
     {
         $this->addOption('expected', ['description' => 'Adds the expected information', 'type' => 'boolean']);
         $this->addOption('single-file', ['description' => 'Put all definitions in a single file', 'type' => 'boolean']);
@@ -73,7 +73,7 @@ class LocaleGenerateCommand extends Command
         $this->addArgument('locales', ['description' => 'The names of the locales you want to genreate seperated by space', 'type' => 'array']);
     }
 
-    protected function execute() : void
+    protected function execute(): void
     {
         $locales = ResourceBundle::getLocales('');
         if ($this->arguments('locales')) {
@@ -205,7 +205,7 @@ class LocaleGenerateCommand extends Command
      * @param array $data
      * @return string
      */
-    private function varExport(array $data) : string
+    private function varExport(array $data): string
     {
         $data = var_export($data, true);
         $data = str_replace(

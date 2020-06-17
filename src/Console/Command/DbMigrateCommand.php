@@ -16,8 +16,8 @@ namespace Commands\Console\Command;
 
 use Origin\Model\Model;
 
-use Origin\Core\Exception\Exception;
 use Origin\Console\Command\Command;
+use Origin\Core\Exception\Exception;
 use Origin\Model\Concern\Timestampable;
 
 class Migration extends Model
@@ -39,7 +39,7 @@ class DbMigrateCommand extends Command
      */
     protected $Migration = null;
 
-    protected function initialize() : void
+    protected function initialize(): void
     {
         $this->addOption('connection', [
             'description' => 'Use a different connection',
@@ -51,7 +51,7 @@ class DbMigrateCommand extends Command
         ]);
     }
  
-    protected function execute() : void
+    protected function execute(): void
     {
         $version = $this->arguments('version');
 
@@ -77,7 +77,7 @@ class DbMigrateCommand extends Command
      * @param integer $version
      * @return void
      */
-    private function migrate(int $version = null) : void
+    private function migrate(int $version = null): void
     {
         $migrations = $this->getMigrations($this->lastMigration(), $version);
         if (empty($migrations)) {
@@ -116,7 +116,7 @@ class DbMigrateCommand extends Command
      * @param int $version
      * @return void
      */
-    private function rollback(int $version) : void
+    private function rollback(int $version): void
     {
         $migrations = $this->getMigrations($version, $this->lastMigration());
         $migrations = array_reverse($migrations);
@@ -171,7 +171,7 @@ class DbMigrateCommand extends Command
      *
      * @return int|null
      */
-    private function lastMigration() : ?int
+    private function lastMigration(): ?int
     {
         $lastMigration = $this->Migration->find('first', ['order' => 'version DESC']);
         if ($lastMigration) {
@@ -187,7 +187,7 @@ class DbMigrateCommand extends Command
      * @param array $statements
      * @return void
      */
-    private function verboseStatements(array $statements) : void
+    private function verboseStatements(array $statements): void
     {
         $this->out('');
         foreach ($statements as $statement) {
@@ -203,7 +203,7 @@ class DbMigrateCommand extends Command
      * @param string $to
      * @return array
      */
-    private function getMigrations(int $from = null, int $to = null) : array
+    private function getMigrations(int $from = null, int $to = null): array
     {
         $results = array_diff(scandir(self::PATH), ['.', '..']);
         $migrations = [];

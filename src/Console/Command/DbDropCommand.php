@@ -24,7 +24,7 @@ class DbDropCommand extends Command
     protected $name = 'db:drop';
     protected $description = 'Drops the database for the connection';
 
-    protected function initialize() : void
+    protected function initialize(): void
     {
         $this->addOption('connection', [
             'description' => 'Use a different connection',
@@ -33,7 +33,7 @@ class DbDropCommand extends Command
         ]);
     }
  
-    protected function execute() : void
+    protected function execute(): void
     {
         $datasource = $this->options('connection');
         $config = ConnectionManager::config($datasource);
@@ -49,15 +49,13 @@ class DbDropCommand extends Command
         $this->runCommand('cache:clear', ['--quiet']);
     }
 
-
-
     /**
      * Drops database for MySQL or Postgres engines
      *
      * @param array $config
      * @return void
      */
-    private function dropDatabase(array $config) : void
+    private function dropDatabase(array $config): void
     {
         // Create tmp Connection
         $database = $config['database'];
@@ -81,11 +79,11 @@ class DbDropCommand extends Command
      * @param array $config
      * @return void
      */
-    private function dropSqliteDatabase(array $config) : void
+    private function dropSqliteDatabase(array $config): void
     {
         $database = str_replace(ROOT . '/', '', $config['database']);
 
-        if (!file_exists($config['database'])) {
+        if (! file_exists($config['database'])) {
             $this->io->status('error', sprintf('Database `%s` does not exist', $database));
             $this->abort();
         }

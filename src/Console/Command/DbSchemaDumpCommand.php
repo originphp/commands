@@ -41,7 +41,7 @@ class %name%Schema extends Schema
 }
 ';
 
-    protected function initialize() : void
+    protected function initialize(): void
     {
         $this->addOption('connection', [
             'description' => 'Use a different connection',
@@ -61,7 +61,7 @@ class %name%Schema extends Schema
         ]);
     }
  
-    protected function execute() : void
+    protected function execute(): void
     {
         $name = $this->arguments('name') ?? 'schema';
 
@@ -93,7 +93,7 @@ class %name%Schema extends Schema
      * @param string $name
      * @return void
      */
-    protected function dump(string $datasource, string $name) : void
+    protected function dump(string $datasource, string $name): void
     {
         $connection = ConnectionManager::get($datasource);
         $dump = [];
@@ -122,7 +122,7 @@ class %name%Schema extends Schema
      * @param string $name
      * @return void
      */
-    protected function dumpPhp(string $datasource, string $name) : void
+    protected function dumpPhp(string $datasource, string $name): void
     {
         $filename = $this->schemaFilename($name, 'php');
         list($plugin, $name) = pluginSplit($name);
@@ -165,7 +165,7 @@ class %name%Schema extends Schema
      * @param array $data
      * @return string
      */
-    protected function datasetToString(string $key, array $data) : string
+    protected function datasetToString(string $key, array $data): string
     {
         $out = '[]';
         if ($data) {
@@ -186,7 +186,7 @@ class %name%Schema extends Schema
      * @param array $data
      * @return array
      */
-    protected function values(array $data) : array
+    protected function values(array $data): array
     {
         $out = [];
         foreach ($data as $key => $value) {

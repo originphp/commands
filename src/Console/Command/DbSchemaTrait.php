@@ -14,10 +14,10 @@
 declare(strict_types = 1);
 namespace Commands\Console\Command;
 
+use Origin\Core\Plugin;
 use Origin\Model\Connection;
 use Origin\Model\ConnectionManager;
 use Origin\Model\Exception\DatasourceException;
-use Origin\Core\Plugin;
 
 trait DbSchemaTrait
 {
@@ -28,7 +28,7 @@ trait DbSchemaTrait
      * @param string $name schema or Plugin.schema
      * @return string
      */
-    public function schemaFilename(string $name, string $extension = 'sql') : string
+    public function schemaFilename(string $name, string $extension = 'sql'): string
     {
         list($plugin, $file) = pluginSplit($name);
         if ($plugin) {
@@ -68,7 +68,7 @@ trait DbSchemaTrait
      * @param string $datasource
      * @return void
      */
-    public function loadSchema(string $filename, string $datasource) : void
+    public function loadSchema(string $filename, string $datasource): void
     {
         if (! file_exists($filename)) {
             $this->throwError("File {$filename} not found");
@@ -95,22 +95,23 @@ trait DbSchemaTrait
     * @param \Origin\Model\Connection $connection
     * @return integer
     */
-    protected function executeStatements(array $statements, Connection $connection) : int
+    protected function executeStatements(array $statements, Connection $connection): int
     {
         $connection->transaction(function ($connection) use ($statements) {
             $this->processStatements($connection, $statements);
         }, true);
+
         return count($statements);
     }
 
-    protected function processStatements(Connection $connection, array $statements) : void
+    protected function processStatements(Connection $connection, array $statements): void
     {
         foreach ($statements  as $statement) {
             $this->processStatement($connection, $statement);
         }
     }
 
-    private function processStatement(Connection $connection, string $statement) : void
+    private function processStatement(Connection $connection, string $statement): void
     {
         try {
             $connection->execute($statement);
@@ -121,5 +122,5 @@ trait DbSchemaTrait
         $this->io->status('ok', str_replace("\n", '', $statement));
     }
 
-    abstract public function throwError(string $title, string $message = null) : void;
+    abstract public function throwError(string $title, string $message = null): void;
 }

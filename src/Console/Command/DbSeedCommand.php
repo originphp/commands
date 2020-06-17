@@ -28,7 +28,7 @@ class DbSeedCommand extends Command
 
     protected $description = 'Seeds the database with initial records';
 
-    protected function initialize() : void
+    protected function initialize(): void
     {
         $this->addOption('connection', [
             'description' => 'Use a different connection',
@@ -47,7 +47,7 @@ class DbSeedCommand extends Command
         ]);
     }
  
-    protected function execute() : void
+    protected function execute(): void
     {
         $name = $this->arguments('name') ?? 'seed';
           
@@ -62,7 +62,7 @@ class DbSeedCommand extends Command
         }
     }
 
-    protected function loadPHPSeed(string $name, string $filename, string $datasource) : void
+    protected function loadPHPSeed(string $name, string $filename, string $datasource): void
     {
         if (! file_exists($filename)) {
             $this->throwError("File {$filename} not found");
@@ -96,7 +96,7 @@ class DbSeedCommand extends Command
     * @param \Origin\Model\Connection $connection
     * @return integer
     */
-    protected function executePreparedStatements(array $statements, Connection $connection) : int
+    protected function executePreparedStatements(array $statements, Connection $connection): int
     {
         $connection->transaction(function ($connection) use ($statements) {
             $this->processPreparedStatements($connection, $statements);
@@ -110,7 +110,7 @@ class DbSeedCommand extends Command
      * @param array $statements
      * @return void
      */
-    protected function processPreparedStatements(Connection $connection, array $statements) : void
+    protected function processPreparedStatements(Connection $connection, array $statements): void
     {
         foreach ($statements as $statement) {
             $this->processPreparedStatement($connection, $statement);
@@ -122,7 +122,7 @@ class DbSeedCommand extends Command
      * @param array $statements
      * @return void
      */
-    protected function processPreparedStatement(Connection $connection, array $statement) : void
+    protected function processPreparedStatement(Connection $connection, array $statement): void
     {
         try {
             $sql = $this->unprepare($statement[0], $statement[1]);
@@ -142,7 +142,7 @@ class DbSeedCommand extends Command
      * @param array $params
      * @return string
      */
-    protected function unprepare(string $sql, array  $params) : string
+    protected function unprepare(string $sql, array  $params): string
     {
         foreach ($params as $needle => $replace) {
             if (is_string($replace)) {

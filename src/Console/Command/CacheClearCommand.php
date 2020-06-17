@@ -23,7 +23,7 @@ class CacheClearCommand extends Command
     protected $name = 'cache:clear';
     protected $description = 'Clears the cache for all configured stores.';
  
-    protected function initialize() : void
+    protected function initialize(): void
     {
         $this->addOption('connection', [
             'description' => 'Use a different connection',
@@ -32,11 +32,11 @@ class CacheClearCommand extends Command
         ]);
     }
 
-    protected function execute() : void
+    protected function execute(): void
     {
         $caches = Cache::config();
         foreach ($caches as $name => $config) {
-            $result = Cache::clear(['config'=>$name]);
+            $result = Cache::clear(['config' => $name]);
             $this->io->status($result ? 'ok' : 'error', $name);
         }
     }

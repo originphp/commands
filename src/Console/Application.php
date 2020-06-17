@@ -16,7 +16,7 @@ class Application extends BaseApplication
      *
      * @return void
      */
-    protected function initialize() : void
+    protected function initialize(): void
     {
     }
 }

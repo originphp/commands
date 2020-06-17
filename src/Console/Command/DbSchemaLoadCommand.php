@@ -25,7 +25,7 @@ class DbSchemaLoadCommand extends Command
     protected $name = 'db:schema:load';
     protected $description = 'Loads the database schema from file';
 
-    protected function initialize() : void
+    protected function initialize(): void
     {
         $this->addOption('connection', [
             'description' => 'Use a different connection',
@@ -44,7 +44,7 @@ class DbSchemaLoadCommand extends Command
         ]);
     }
  
-    protected function execute() : void
+    protected function execute(): void
     {
         $name = $this->arguments('name') ?? 'schema';
         $type = $this->options('type');
@@ -64,7 +64,7 @@ class DbSchemaLoadCommand extends Command
         $this->runCommand('cache:clear', ['--quiet']);
     }
 
-    public function loadPhpSchema(string $name, string $filename, string $datasource) : void
+    public function loadPhpSchema(string $name, string $filename, string $datasource): void
     {
         if (! file_exists($filename)) {
             $this->throwError("File {$filename} not found");

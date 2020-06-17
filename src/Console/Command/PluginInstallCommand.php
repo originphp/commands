@@ -22,7 +22,7 @@ class PluginInstallCommand extends Command
     protected $name = 'plugin:install';
     protected $description = 'Installs a plugin using a URL or github username/repo. GIT is required to be installed.';
 
-    protected function initialize() : void
+    protected function initialize(): void
     {
         $this->addArgument('url', [
             'help' => 'github repo URL or github username/repo',
@@ -39,7 +39,7 @@ class PluginInstallCommand extends Command
      * @param string $url
      * @return string
      */
-    protected function getUrl(string $url) : string
+    protected function getUrl(string $url): string
     {
         if (strtolower(substr($url, 0, 4)) !== 'http') {
             $url = "https://github.com/{$url}";
@@ -59,7 +59,7 @@ class PluginInstallCommand extends Command
      * @param string $plugin
      * @return string
      */
-    protected function getPlugin(string $url, string $plugin = null) : string
+    protected function getPlugin(string $url, string $plugin = null): string
     {
         if ($plugin) {
             if (! preg_match('/^([A-Z]+[a-z0-9]+)+/', $plugin)) {
@@ -81,7 +81,7 @@ class PluginInstallCommand extends Command
      * @param string $folder
      * @return bool
      */
-    protected function download(string $url, string $folder) : bool
+    protected function download(string $url, string $folder): bool
     {
         shell_exec("git clone {$url} {$folder}");
        
@@ -94,7 +94,7 @@ class PluginInstallCommand extends Command
      * @param string $plugin
      * @return void
      */
-    protected function appendApplication(string $plugin) : void
+    protected function appendApplication(string $plugin): void
     {
         $file = CONFIG . DS . 'bootstrap.php';
         $contents = file_get_contents($file);
@@ -102,11 +102,11 @@ class PluginInstallCommand extends Command
             'Plugin::initialize();',
             "Plugin::load('{$plugin}');\nPlugin::initialize();",
             $contents
-            );
+        );
         file_put_contents($file, $contents);
     }
  
-    protected function execute() : void
+    protected function execute(): void
     {
         $url = $this->getUrl($this->arguments('url'));
         $plugin = $this->getPlugin($url, $this->arguments('name'));

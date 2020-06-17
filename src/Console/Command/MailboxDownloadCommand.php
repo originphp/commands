@@ -27,7 +27,7 @@ class MailboxDownloadCommand extends Command
         'Downloads messages for the mailboxes'
     ];
 
-    protected function initialize() : void
+    protected function initialize(): void
     {
         $this->addArgument('account', [
             'description' => 'An account name or a list of accounts seperated by spaces',
@@ -42,7 +42,7 @@ class MailboxDownloadCommand extends Command
      *
      * @return void
      */
-    protected function execute() : void
+    protected function execute(): void
     {
         $accounts = $this->arguments('account') ?? ['default'];
      

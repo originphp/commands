@@ -29,7 +29,7 @@ class DbRollbackCommand extends Command
      */
     protected $Migration = null;
 
-    protected function initialize() : void
+    protected function initialize(): void
     {
         $this->addOption('connection', [
             'description' => 'Use a different connection',
@@ -38,7 +38,7 @@ class DbRollbackCommand extends Command
         ]);
     }
  
-    protected function execute() : void
+    protected function execute(): void
     {
         $this->Migration = new Model([
             'name' => 'Migration',
@@ -58,7 +58,7 @@ class DbRollbackCommand extends Command
      *
      * @return int|null
      */
-    private function lastMigration() : ?int
+    private function lastMigration(): ?int
     {
         $lastMigration = $this->Migration->find('first', ['order' => 'version DESC']);
         if ($lastMigration) {
