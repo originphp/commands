@@ -4,6 +4,9 @@
  * This is the bootstrap for plugin when using as standalone (for development). Do not
  * use this bootstrap as a plugin. .gitattributes has blocked this from being installed.
  */
+
+use Origin\Cache\Cache;
+use Origin\Cache\Engine\FileEngine;
 use Origin\Job\Queue;
 use Origin\Core\Config;
 use Origin\Model\ConnectionManager;
@@ -45,6 +48,14 @@ Queue::config('test', [
 Queue::config('test', [
     'engine' => 'Database',
     'connection' => 'test'
+]);
+
+Cache::config('origin', [
+    'className' => FileEngine::class,
+    'path' => CACHE . '/origin',
+    'duration' =>  '+2 minutes',
+    'prefix' => 'cache_',
+    'serialize' => true
 ]);
 
 Mailbox::config('default', [
