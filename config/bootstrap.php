@@ -12,16 +12,6 @@ use Origin\Mailbox\Mailbox;
 require __DIR__ . '/paths.php';
 require ORIGIN . '/src/bootstrap.php';
 
-/**
- * Load environment vars
- */
-if (file_exists(__DIR__ . '/.env.php')) {
-    $result = require __DIR__ . '/.env.php';
-    foreach ($result as $key => $value) {
-        $_ENV[$key] = $value;
-    }
-}
-
 Config::write('App.debug', env('APP_DEBUG', true));
 Config::write('App.namespace', 'Commands');
 Config::write('App.schemaFormat', 'php');

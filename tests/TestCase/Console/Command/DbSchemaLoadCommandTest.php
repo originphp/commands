@@ -93,7 +93,7 @@ class DbSchemaLoadCommandTest extends \PHPUnit\Framework\TestCase
         $this->exec('db:schema:load --connection=test --type=php migrations');
         $this->assertExitSuccess();
 
-        $this->assertRegExp('/Executed (1|2) statements/', $this->output());
+        $this->assertMatchesRegularExpression('/Executed (1|2) statements/', $this->output());
         ConnectionManager::get('test')->execute('DROP TABLE IF EXISTS migrations');
     }
 

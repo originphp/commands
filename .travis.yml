@@ -1,7 +1,5 @@
-# Issue with PHP 7.3 + PHPUnit + Xdebug when tests are created its causing segfault 11 on travis.
 language: php
 php:
-  - 7.2
   - 7.3
   - 7.4
 dist: xenial
