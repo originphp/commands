@@ -21,7 +21,8 @@ use Origin\Model\ConnectionManager;
 
 class DbSchemaLoadCommand extends Command
 {
-    use DbSchemaTrait;
+    use DbSchemaTrait, DeprecationNoticeTrait;
+
     protected $name = 'db:schema:load';
     protected $description = 'Loads the database schema from file';
 
@@ -42,6 +43,7 @@ class DbSchemaLoadCommand extends Command
             'description' => 'How the schema will be dumped, in sql or php',
             'default' => Config::read('App.schemaFormat') ?? Config::read('Schema.format'),
         ]);
+        $this->checkForDeprecations();
     }
  
     protected function execute(): void

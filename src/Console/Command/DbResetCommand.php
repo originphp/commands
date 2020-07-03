@@ -20,6 +20,8 @@ use Origin\Console\Command\Command;
 
 class DbResetCommand extends Command
 {
+    use DeprecationNoticeTrait;
+
     protected $name = 'db:reset';
 
     protected $description = 'Drops the database and then runs setup';
@@ -42,6 +44,8 @@ class DbResetCommand extends Command
             'description' => 'Use sql or php file',
             'default' => Config::read('App.schemaFormat') ?? Config::read('Schema.format'),
         ]);
+
+        $this->checkForDeprecations();
     }
  
     protected function execute(): void

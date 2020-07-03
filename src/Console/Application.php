@@ -19,12 +19,5 @@ class Application extends BaseApplication
      */
     protected function initialize(): void
     {
-        if (!Config::exists('App.schemaFormat')) {
-            deprecationWarning('The Schema.format setting is deprecated use App.schemaFormat instead.');
-        }
-        
-        if (!Config::exists('App.mailboxKeepEmails')) {
-            deprecationWarning('The mailboxKeepEmails setting is deprecated use App.mailboxKeepEmails instead.');
-        }
     }
 }

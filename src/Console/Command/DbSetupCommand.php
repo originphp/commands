@@ -19,8 +19,9 @@ use Origin\Console\Command\Command;
 
 class DbSetupCommand extends Command
 {
-    protected $name = 'db:setup';
+    use DeprecationNoticeTrait;
 
+    protected $name = 'db:setup';
     protected $description = 'Creates the database,loads schema and seeds the database';
 
     protected function initialize(): void
@@ -37,6 +38,7 @@ class DbSetupCommand extends Command
             'description' => 'Use sql or php file',
             'default' => Config::read('App.schemaFormat') ?? Config::read('Schema.format'),
         ]);
+        $this->checkForDeprecations();
     }
  
     protected function execute(): void

@@ -17,6 +17,7 @@ namespace Commands\Console\Command;
 use Exception;
 use Origin\Mailbox\Mailbox;
 use Origin\Console\Command\Command;
+use Origin\Core\Config;
 use Origin\Mailbox\Model\ImapMessage;
 use Origin\Mailbox\Model\InboundEmail;
 
@@ -35,6 +36,10 @@ class MailboxDownloadCommand extends Command
         ]);
         $this->loadModel('InboundEmail', ['className' => InboundEmail::class]);
         $this->loadModel('Imap', ['className' => ImapMessage::class]);
+
+        if (!Config::exists('App.mailboxKeepEmails')) {
+            deprecationWarning('The mailboxKeepEmails setting is deprecated use App.mailboxKeepEmails instead.');
+        }
     }
  
     /**

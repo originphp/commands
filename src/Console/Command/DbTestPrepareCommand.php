@@ -21,6 +21,7 @@ use Origin\Model\Engine\SqliteEngine;
 
 class DbTestPrepareCommand extends Command
 {
+    use DeprecationNoticeTrait;
     protected $name = 'db:test:prepare';
     protected $description = 'Prepares the test database using the current schema file';
     
@@ -33,6 +34,7 @@ class DbTestPrepareCommand extends Command
             'description' => 'Which schema type to be loaded sql or php',
             'default' => Config::read('App.schemaFormat') ?? Config::read('Schema.format'),
         ]);
+        $this->checkForDeprecations();
     }
     protected function execute(): void
     {

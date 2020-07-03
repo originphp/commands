@@ -23,7 +23,7 @@ use Origin\Model\Exception\DatasourceException;
 
 class DbSeedCommand extends Command
 {
-    use DbSchemaTrait;
+    use DbSchemaTrait,DeprecationNoticeTrait;
     protected $name = 'db:seed';
 
     protected $description = 'Seeds the database with initial records';
@@ -45,6 +45,7 @@ class DbSeedCommand extends Command
             'description' => 'Wether to use sql or php',
             'default' => Config::read('App.schemaFormat') ?? Config::read('Schema.format'),
         ]);
+        $this->checkForDeprecations();
     }
  
     protected function execute(): void

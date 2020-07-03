@@ -21,7 +21,7 @@ use Origin\Model\ConnectionManager;
 
 class DbSchemaDumpCommand extends Command
 {
-    use DbSchemaTrait;
+    use DbSchemaTrait, DeprecationNoticeTrait;
     
     protected $name = 'db:schema:dump';
     protected $description = 'Dumps the database schema to file';
@@ -59,6 +59,7 @@ class %name%Schema extends Schema
         $this->addArgument('name', [
             'description' => 'schema_name or Plugin.schema_name',
         ]);
+        $this->checkForDeprecations();
     }
  
     protected function execute(): void
