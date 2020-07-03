@@ -59,7 +59,7 @@ class DbSetupCommandTest extends \PHPUnit\Framework\TestCase
 
     public function testExecutePostgres()
     {
-        if (ConnectionManager::get('test')->engine() !== 'pgsql') {
+        if (ConnectionManager::get('test')->engine() !== 'postgres') {
             $this->markTestSkipped('This test is for PostgreSQL');
         }
         
@@ -130,7 +130,7 @@ class DbSetupCommandTest extends \PHPUnit\Framework\TestCase
      */
     public function testSetupPHPPgsql()
     {
-        if (ConnectionManager::get('test')->engine() !== 'pgsql') {
+        if (ConnectionManager::get('test')->engine() !== 'postgres') {
             $this->markTestSkipped('This test is for Postgres');
         }
         $this->exec('db:setup --connection=d4 --type=php');

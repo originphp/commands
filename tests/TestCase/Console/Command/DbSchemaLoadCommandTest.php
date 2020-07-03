@@ -32,7 +32,7 @@ class DbSchemaLoadCommandTest extends \PHPUnit\Framework\TestCase
     protected function getSchemaName()
     {
         $engine = ConnectionManager::get('test')->engine();
-        if ($engine === 'pgsql') {
+        if ($engine === 'postgres') {
             return 'schema-pg';
         }
 
