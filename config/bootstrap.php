@@ -18,6 +18,7 @@ require ORIGIN . '/src/bootstrap.php';
 Config::write('App.debug', env('APP_DEBUG', true));
 Config::write('App.namespace', 'Commands');
 Config::write('App.schemaFormat', 'php');
+Config::write('App.mailboxKeepEmails', '+30 days');
 
 ConnectionManager::config('default', [
     'host' => env('DB_HOST', '127.0.0.1'),
