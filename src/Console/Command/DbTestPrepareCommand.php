@@ -31,7 +31,7 @@ class DbTestPrepareCommand extends Command
          */
         $this->addOption('type', [
             'description' => 'Which schema type to be loaded sql or php',
-            'default' => Config::read('App.schemaFormat') ?? Config::read('Schema.format'),
+            'default' => Config::read('App.schemaFormat')
         ]);
     }
     protected function execute(): void

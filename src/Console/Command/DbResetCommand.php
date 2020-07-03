@@ -40,7 +40,7 @@ class DbResetCommand extends Command
          */
         $this->addOption('type', [
             'description' => 'Use sql or php file',
-            'default' => Config::read('App.schemaFormat') ?? Config::read('Schema.format'),
+            'default' => Config::read('App.schemaFormat')
         ]);
     }
  

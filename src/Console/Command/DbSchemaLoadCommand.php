@@ -40,7 +40,7 @@ class DbSchemaLoadCommand extends Command
          */
         $this->addOption('type', [
             'description' => 'How the schema will be dumped, in sql or php',
-            'default' => Config::read('App.schemaFormat') ?? Config::read('Schema.format'),
+            'default' => Config::read('App.schemaFormat')
         ]);
     }
  
