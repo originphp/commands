@@ -13,7 +13,7 @@ use Origin\Model\ConnectionManager;
 use Origin\Mailbox\Mailbox;
 
 require __DIR__ . '/paths.php';
-require ORIGIN . '/src/bootstrap.php';
+require dirname(__DIR__) . '/vendor/originphp/Core/bootstrap.php';
 
 Config::write('App.debug', env('APP_DEBUG', true));
 Config::write('App.namespace', 'Commands');
