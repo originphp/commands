@@ -38,7 +38,7 @@ class DbTestPrepareCommandTest extends \PHPUnit\Framework\TestCase
     {
         $this->exec('db:test:prepare --type=php');
         $this->assertExitSuccess();
-        $this->assertRegExp('/Executed ([1-9]) statements/', $this->output());
+        $this->assertMatchesRegularExpression('/Executed ([1-9]) statements/', $this->output());
     }
 
     protected function tearDown() : void

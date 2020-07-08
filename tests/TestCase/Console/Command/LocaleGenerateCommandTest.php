@@ -27,7 +27,7 @@ class LocaleGenerateCommandTest extends \PHPUnit\Framework\TestCase
         $this->exec('locale:generate --force');
         $this->assertExitSuccess();
         $output = $this->output();
-        $this->assertRegExp('/Generated ([0-9]{3}) locale definitions/', $output); // Different systems generate different amounts
+        $this->assertMatchesRegularExpression('/Generated ([0-9]{3}) locale definitions/', $output); // Different systems generate different amounts
       
         // Remove files
         $this->recursiveDelete(CONFIG . DS . 'locales'); // reach path

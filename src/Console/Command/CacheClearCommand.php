@@ -39,5 +39,10 @@ class CacheClearCommand extends Command
             $result = Cache::clear(['config' => $name]);
             $this->io->status($result ? 'ok' : 'error', $name);
         }
+
+        if (file_exists(CONFIG .'/.env.php')) {
+            $result = unlink(CONFIG .'/.env.php');
+            $this->io->status($result ? 'ok' : 'error', CONFIG .'/.env.php');
+        }
     }
 }

@@ -66,7 +66,7 @@ class DbResetCommandTest extends \PHPUnit\Framework\TestCase
 
     public function testExecutePostgreSQL()
     {
-        if (ConnectionManager::get('test')->engine() !== 'pgsql') {
+        if (ConnectionManager::get('test')->engine() !== 'postgres') {
             $this->markTestSkipped('This test is for pgsql');
         }
         $ds = ConnectionManager::get('test');

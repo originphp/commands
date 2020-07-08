@@ -22,13 +22,18 @@ class PassOrFailJob extends Job
 {
     protected $connection = 'test';
 
+    public function initialize() : void
+    {
+        $this->onError('errorHandler');
+    }
+
     public function execute(bool $pass = true)
     {
         if (! $pass) {
             $a = 1 / 0;
         }
     }
-    public function onError(\Exception $exception) : void
+    public function errorHandler(\Exception $exception) : void
     {
         $this->retry(['wait' => '+1 second','limit' => 1]);
     }

@@ -26,18 +26,28 @@
         }
     },
     "require": {
-        "php": "^7.2.0",
-        "originphp/framework": "^2.7.3",
-        "originphp/inflector": "^1.0",
+        "php": ">=7.3.0",
+        "originphp/console": "^3.0",
+        "originphp/cache": "^1.2",
+        "originphp/model": "^3.0",
         "originphp/plugin-installer": "^1.3"
     },
     "require-dev": {
-        "phpunit/phpunit": "^8.0"
+        "phpunit/phpunit": "^9.2",
+        "originphp/test-suite": "^3.0",
+        "originphp/job": "^3.0",
+        "originphp/migration": "^3.0",
+        "originphp/mailbox": "^3.0",
+        "originphp/dotenv": "^1.0"
     },
     "suggest": {
+        "originphp/job": "If you are going to be working with Jobs",
+        "originphp/mailbox": "If you are going to be working with Mailboxes",
+        "originphp/migrations": "If you are going to be working with Migrations",
         "ext-redis": "Redis",
         "ext-imap": "Imap",
         "ext-mailparse": "Mailparse"
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

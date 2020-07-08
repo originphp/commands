@@ -43,7 +43,7 @@ class DbSeedCommand extends Command
          */
         $this->addOption('type', [
             'description' => 'Wether to use sql or php',
-            'default' => Config::read('App.schemaFormat') ?? Config::read('Schema.format'),
+            'default' => Config::read('App.schemaFormat')
         ]);
         $this->checkForDeprecations();
     }

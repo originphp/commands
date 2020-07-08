@@ -4,28 +4,21 @@
  * This is the bootstrap for plugin when using as standalone (for development). Do not
  * use this bootstrap as a plugin. .gitattributes has blocked this from being installed.
  */
+
+use Origin\Cache\Cache;
+use Origin\Cache\Engine\FileEngine;
 use Origin\Job\Queue;
 use Origin\Core\Config;
 use Origin\Model\ConnectionManager;
 use Origin\Mailbox\Mailbox;
 
 require __DIR__ . '/paths.php';
-require ORIGIN . '/src/bootstrap.php';
-
-/**
- * Load environment vars
- */
-if (file_exists(__DIR__ . '/.env.php')) {
-    $result = require __DIR__ . '/.env.php';
-    foreach ($result as $key => $value) {
-        $_ENV[$key] = $value;
-    }
-}
+require dirname(__DIR__) . '/vendor/originphp/Core/bootstrap.php';
 
 Config::write('App.debug', env('APP_DEBUG', true));
 Config::write('App.namespace', 'Commands');
 Config::write('App.schemaFormat', 'php');
-Config::write('App.mailboxKeepEmails', '+ 30 days');
+Config::write('App.mailboxKeepEmails', '+30 days');
 
 ConnectionManager::config('default', [
     'host' => env('DB_HOST', '127.0.0.1'),
@@ -56,6 +49,14 @@ Queue::config('test', [
 Queue::config('test', [
     'engine' => 'Database',
     'connection' => 'test'
+]);
+
+Cache::config('origin', [
+    'className' => FileEngine::class,
+    'path' => CACHE . '/origin',
+    'duration' =>  '+2 minutes',
+    'prefix' => 'cache_',
+    'serialize' => true
 ]);
 
 Mailbox::config('default', [

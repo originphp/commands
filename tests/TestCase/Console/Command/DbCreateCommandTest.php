@@ -61,7 +61,7 @@ class DbCreateCommandTest extends \PHPUnit\Framework\TestCase
 
     public function testExecutePgSQL()
     {
-        if (ConnectionManager::get('test')->engine() !== 'pgsql') {
+        if (ConnectionManager::get('test')->engine() !== 'postgres') {
             $this->markTestSkipped('This test is for pgsql');
         }
         $this->exec('db:create --connection=d1 schema-pg');
