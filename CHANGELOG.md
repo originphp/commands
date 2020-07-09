@@ -4,7 +4,8 @@
 
 ### Fixed
 
-- Fixed bootstrap path 
+- Fixed bootstrap path
+- Fixed missing dependency
 
 ## [3.0.0] - 2020-07-08
 
