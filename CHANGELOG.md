@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.1] - 2020-07-09
+
+### Fixed
+
+- Fixed bootstrap path 
+
 ## [3.0.0] - 2020-07-08
 
 ### Changed
