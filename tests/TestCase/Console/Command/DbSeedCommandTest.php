@@ -43,11 +43,11 @@ class DbSeedCommandTest extends OriginTestCase
     {
         # Create fake plugin
         $directory = sys_get_temp_dir() . '/plugins/make';
-        if (!file_exists($directory)) {
+        if (! file_exists($directory)) {
             mkdir(sys_get_temp_dir() . '/plugins/make', 0775, true);
         }
 
-        Plugin::load('Make', ['path'=>$directory ]);
+        Plugin::load('Make', ['path' => $directory]);
     
         $this->exec('db:seed --connection=test --type=sql Make.records');
         $this->assertExitError();

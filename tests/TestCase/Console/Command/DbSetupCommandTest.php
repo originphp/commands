@@ -22,7 +22,7 @@ class DbSetupCommandTest extends \PHPUnit\Framework\TestCase
 {
     use ConsoleIntegrationTestTrait;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $config = ConnectionManager::config('test');
         $config['database'] = 'd4';
@@ -30,7 +30,7 @@ class DbSetupCommandTest extends \PHPUnit\Framework\TestCase
         ConnectionManager::config('d4', $config);
     }
 
-    protected function tearDown() : void
+    protected function tearDown(): void
     {
         ConnectionManager::drop('d4'); // Postgres & sqlite issues
         if ($this->isSqlite()) {
@@ -93,7 +93,7 @@ class DbSetupCommandTest extends \PHPUnit\Framework\TestCase
     {
         # Create fake plugin
         @mkdir(sys_get_temp_dir() . '/plugins/make', 0775, true);
-        Plugin::load('Make', ['path'=>sys_get_temp_dir() . '/plugins/make']);
+        Plugin::load('Make', ['path' => sys_get_temp_dir() . '/plugins/make']);
 
         $this->exec('db:setup --connection=d4 --type=sql Make.pschema');
 
@@ -163,11 +163,10 @@ class DbSetupCommandTest extends \PHPUnit\Framework\TestCase
         $this->assertOutputContains('Executed 11 statements');
     }
 
-
     /**
      * @return boolean
      */
-    private function isSqlite() : bool
+    private function isSqlite(): bool
     {
         return ConnectionManager::get('test')->engine() === 'sqlite';
     }

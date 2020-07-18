@@ -14,15 +14,15 @@
 declare(strict_types = 1);
 namespace Commands\Test\Console\Command;
 
+use Origin\Core\Plugin;
 use Origin\Model\ConnectionManager;
 use Origin\TestSuite\ConsoleIntegrationTestTrait;
-use Origin\Core\Plugin;
 
 class DbSchemaLoadCommandTest extends \PHPUnit\Framework\TestCase
 {
     use ConsoleIntegrationTestTrait;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         // Create copy
         $ds = ConnectionManager::get('test');
@@ -82,7 +82,7 @@ class DbSchemaLoadCommandTest extends \PHPUnit\Framework\TestCase
     {
         # Create fake plugin
         @mkdir(sys_get_temp_dir() . '/plugins/make', 0775, true);
-        Plugin::load('Make', ['path'=>sys_get_temp_dir() . '/plugins/make']);
+        Plugin::load('Make', ['path' => sys_get_temp_dir() . '/plugins/make']);
         $this->exec('db:schema:load --connection=test --type=sql Make.pschema');
         $this->assertExitError();
         $this->assertErrorContains('/plugins/make/database/pschema.sql');
@@ -104,7 +104,7 @@ class DbSchemaLoadCommandTest extends \PHPUnit\Framework\TestCase
         $this->assertErrorContains('The type `ruby` is invalid');
     }
 
-    protected function tearDown() : void
+    protected function tearDown(): void
     {
         $ds = ConnectionManager::get('test');
         $ds->execute('DROP TABLE IF EXISTS posts');

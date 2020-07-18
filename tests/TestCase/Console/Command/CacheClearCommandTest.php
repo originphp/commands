@@ -23,7 +23,7 @@ class CacheClearCommandTest extends \PHPUnit\Framework\TestCase
 
     public function testExecution()
     {
-        Cache::config('default', ['engine'=>'Array']);
+        Cache::config('default', ['engine' => 'Array']);
         Cache::write('foo', 'bar');
         $this->assertEquals('bar', Cache::read('foo'));
 

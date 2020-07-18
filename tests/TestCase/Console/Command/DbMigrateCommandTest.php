@@ -14,10 +14,10 @@
 declare(strict_types = 1);
 namespace Commands\Test\Console\Command;
 
-use Origin\Model\Concern\Timestampable;
-use Origin\Model\ConnectionManager;
 use Origin\Model\Model;
+use Origin\Model\ConnectionManager;
 use Origin\TestSuite\OriginTestCase;
+use Origin\Model\Concern\Timestampable;
 use Origin\TestSuite\ConsoleIntegrationTestTrait;
 
 class Migration extends Model
@@ -31,8 +31,7 @@ class DbMigrateCommandTest extends OriginTestCase
 
     protected $fixtures = ['Migration'];
 
-
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->Migration = $this->loadModel('Migration', [
             'className' => Migration::class,
@@ -40,7 +39,7 @@ class DbMigrateCommandTest extends OriginTestCase
         ]);
     }
 
-    protected function tearDown() : void
+    protected function tearDown(): void
     {
         $ds = ConnectionManager::get('test');
         $ds->execute('DROP table IF EXISTS foo');

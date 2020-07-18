@@ -25,19 +25,19 @@ class DbDropCommandTest extends OriginTestCase
     /**
      * @return boolean
      */
-    private function isSqlite() : bool
+    private function isSqlite(): bool
     {
         return ConnectionManager::get('test')->engine() === 'sqlite';
     }
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $config = ConnectionManager::config('test');
         $config['database'] = 'd2';
         ConnectionManager::config('d2', $config);
     }
 
-    protected function tearDown() : void
+    protected function tearDown(): void
     {
         ConnectionManager::drop('d2'); // Postgres & SQLite issues
         if ($this->isSqlite()) {

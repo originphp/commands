@@ -51,7 +51,7 @@ class DbRollbackCommandTest extends OriginTestCase
         $this->assertErrorContains('No migrations found'); // Its a warning
     }
 
-    protected function tearDown() : void
+    protected function tearDown(): void
     {
         $ds = ConnectionManager::get('test');
         $ds->execute('DROP table IF EXISTS foo');
