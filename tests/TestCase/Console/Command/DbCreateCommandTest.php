@@ -1,7 +1,7 @@
 <?php
 /**
  * OriginPHP Framework
- * Copyright 2018 - 2019 Jamiel Sharief.
+ * Copyright 2018 - 2020 Jamiel Sharief.
  *
  * Licensed under The MIT License
  * The above copyright notice and this permission notice shall be included in all copies or substantial
@@ -24,19 +24,19 @@ class DbCreateCommandTest extends \PHPUnit\Framework\TestCase
     /**
      * @return boolean
      */
-    private function isSqlite() : bool
+    private function isSqlite(): bool
     {
         return ConnectionManager::get('test')->engine() === 'sqlite';
     }
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $config = ConnectionManager::config('test');
         $config['database'] = 'd1';
         ConnectionManager::config('d1', $config);
     }
 
-    protected function tearDown() : void
+    protected function tearDown(): void
     {
         ConnectionManager::drop('d1'); // Postgres & SQLite issues
         if ($this->isSqlite()) {
@@ -46,7 +46,6 @@ class DbCreateCommandTest extends \PHPUnit\Framework\TestCase
             $ds->execute('DROP DATABASE IF EXISTS d1');
         }
     }
-
 
     public function testExecuteMySQL()
     {
@@ -81,7 +80,6 @@ class DbCreateCommandTest extends \PHPUnit\Framework\TestCase
         $this->assertOutputContains('Database `d1` created');
     }
 
-
     public function testExecuteInvalidDatasource()
     {
         $this->exec('db:create --connection=foo');
@@ -112,14 +110,13 @@ class DbCreateCommandTest extends \PHPUnit\Framework\TestCase
             $config['database'] = '<invalid-database-name>';
         }
        
-       
         ConnectionManager::config('d1', $config);
         $this->exec('db:create --connection=d1');
         $this->assertExitError();
         $this->assertErrorContains('DatasourceException');
     }
 
-    public function shutdown() : void
+    public function shutdown(): void
     {
         $ds = ConnectionManager::get('test');
         $ds->execute('DROP DATABASE IF EXISTS d1');

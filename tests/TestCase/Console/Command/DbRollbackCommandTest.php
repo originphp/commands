@@ -1,7 +1,7 @@
 <?php
 /**
  * OriginPHP Framework
- * Copyright 2018 - 2019 Jamiel Sharief.
+ * Copyright 2018 - 2020 Jamiel Sharief.
  *
  * Licensed under The MIT License
  * The above copyright notice and this permission notice shall be included in all copies or substantial
@@ -51,7 +51,7 @@ class DbRollbackCommandTest extends OriginTestCase
         $this->assertErrorContains('No migrations found'); // Its a warning
     }
 
-    protected function tearDown() : void
+    protected function tearDown(): void
     {
         $ds = ConnectionManager::get('test');
         $ds->execute('DROP table IF EXISTS foo');

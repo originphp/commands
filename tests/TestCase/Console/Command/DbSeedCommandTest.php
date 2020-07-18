@@ -1,7 +1,7 @@
 <?php
 /**
  * OriginPHP Framework
- * Copyright 2018 - 2019 Jamiel Sharief.
+ * Copyright 2018 - 2020 Jamiel Sharief.
  *
  * Licensed under The MIT License
  * The above copyright notice and this permission notice shall be included in all copies or substantial
@@ -43,11 +43,11 @@ class DbSeedCommandTest extends OriginTestCase
     {
         # Create fake plugin
         $directory = sys_get_temp_dir() . '/plugins/make';
-        if (!file_exists($directory)) {
+        if (! file_exists($directory)) {
             mkdir(sys_get_temp_dir() . '/plugins/make', 0775, true);
         }
 
-        Plugin::load('Make', ['path'=>$directory ]);
+        Plugin::load('Make', ['path' => $directory]);
     
         $this->exec('db:seed --connection=test --type=sql Make.records');
         $this->assertExitError();

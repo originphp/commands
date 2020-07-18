@@ -22,7 +22,7 @@
         -->
     </php>
     <listeners>
-        <listener class="Origin\TestSuite\OriginTestListener"  file ="./vendor/originphp/test-suite/OriginTestListener.php"></listener>
+        <listener class="Origin\TestSuite\OriginTestListener"  file ="./vendor/originphp/framework/src/TestSuite/OriginTestListener.php"></listener>
     </listeners>
     <filter>
         <whitelist>

@@ -1,5 +1,26 @@
 # Changelog
 
+
+## [3.2.0] - 2020-07-18
+
+### Added
+
+- Added `maintenance:start` command
+- Added `maintenance:end` command
+
+## [3.1.0] - 2020-07-13
+
+### Changed
+
+- Changed dependency to framework, as I have decided to hold back on decoupling until the current subtree split process can be ensured to be 100% reliable.
+
+## [3.0.1] - 2020-07-09
+
+### Fixed
+
+- Fixed bootstrap path
+- Fixed missing dependency
+
 ## [3.0.0] - 2020-07-08
 
 ### Changed

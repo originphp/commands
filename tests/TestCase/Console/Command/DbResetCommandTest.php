@@ -1,7 +1,7 @@
 <?php
 /**
  * OriginPHP Framework
- * Copyright 2018 - 2019 Jamiel Sharief.
+ * Copyright 2018 - 2020 Jamiel Sharief.
  *
  * Licensed under The MIT License
  * The above copyright notice and this permission notice shall be included in all copies or substantial
@@ -21,7 +21,7 @@ class DbResetCommandTest extends \PHPUnit\Framework\TestCase
 {
     use ConsoleIntegrationTestTrait;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $config = ConnectionManager::config('test');
         $config['database'] = 'd3';
@@ -31,12 +31,12 @@ class DbResetCommandTest extends \PHPUnit\Framework\TestCase
     /**
     * @return boolean
     */
-    private function isSqlite() : bool
+    private function isSqlite(): bool
     {
         return ConnectionManager::get('test')->engine() === 'sqlite';
     }
 
-    protected function tearDown() : void
+    protected function tearDown(): void
     {
         ConnectionManager::drop('d3'); // Postgres & SQLite issues
         if ($this->isSqlite()) {

@@ -1,7 +1,7 @@
 <?php
 /**
  * OriginPHP Framework
- * Copyright 2018 - 2019 Jamiel Sharief.
+ * Copyright 2018 - 2020 Jamiel Sharief.
  *
  * Licensed under The MIT License
  * The above copyright notice and this permission notice shall be included in all copies or substantial
@@ -27,7 +27,7 @@ class DbTestPrepareCommandTest extends \PHPUnit\Framework\TestCase
 
     protected $config = [];
     
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $config = $this->config = ConnectionManager::config('test');
         $config['database'] = 'tmp123';
@@ -41,7 +41,7 @@ class DbTestPrepareCommandTest extends \PHPUnit\Framework\TestCase
         $this->assertMatchesRegularExpression('/Executed ([1-9]) statements/', $this->output());
     }
 
-    protected function tearDown() : void
+    protected function tearDown(): void
     {
         /**
          * Clean up tables
@@ -66,7 +66,7 @@ class DbTestPrepareCommandTest extends \PHPUnit\Framework\TestCase
     /**
     * @return boolean
     */
-    private function isSqlite() : bool
+    private function isSqlite(): bool
     {
         return ConnectionManager::get('test')->engine() === 'sqlite';
     }
