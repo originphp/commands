@@ -27,7 +27,7 @@
     },
     "require": {
         "php": ">=7.3.0",
-        "originphp/framework": "^3.0",
+        "originphp/framework": "^3.1",
         "originphp/plugin-installer": "^1.3"
     },
     "require-dev": {
