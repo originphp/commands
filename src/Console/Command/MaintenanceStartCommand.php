@@ -26,8 +26,7 @@ class MaintenanceStartCommand extends Command
     protected function initialize(): void
     {
         $this->addOption('message', [
-            'description' => 'Custom message to be shown',
-            'default' => 'The site is temporarily down for maintenance.'
+            'description' => 'Custom message to be shown'
         ]);
 
         /**
