@@ -50,6 +50,11 @@ class MailboxDownloadCommand extends Command
     protected function execute(): void
     {
         $accounts = $this->arguments('account') ?? ['default'];
+
+        if ($this->maintenanceMode()) {
+            $this->warning('Maintenance mode is enabled, emails will not be downloaded.');
+            $this->exit();
+        }
      
         foreach ($accounts as $account) {
             $this->debug('<green>> </green><white>Checking `' . $account . '` email account</white>');
@@ -67,5 +72,15 @@ class MailboxDownloadCommand extends Command
                 $this->debug('<green>> </green> <white>' . $exception->getMessage() .'</white>');
             }
         }
+    }
+
+    /**
+     * Checks if maintenance is enabled
+     *
+     * @return boolean
+     */
+    protected function maintenanceMode() : bool
+    {
+        return file_exists(tmp_path('maintenance.json'));
     }
 }

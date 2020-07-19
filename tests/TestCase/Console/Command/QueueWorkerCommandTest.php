@@ -93,4 +93,24 @@ class QueueWorkerCommandTest extends OriginTestCase
         $this->assertOutputContains('<cyan>Retry #1</cyan> <text>PassOrFail</text>');
         $this->assertOutputContains('<fail> FAILED </fail>');
     }
+
+    public function testMaintenanceMode()
+    {
+        file_put_contents(tmp_path('maintenance.json'), json_encode([]));
+     
+        (new PassOrFailJob())->dispatch(true);
+        $this->exec('queue:worker --connection=test');
+        
+        // Test that the job is not run
+        $this->assertExitSuccess();
+        $this->assertOutputNotContains('<cyan>Run</cyan> <text>PassOrFail</text>');
+        $this->assertOutputNotContains('<pass> OK </pass>');
+        @unlink(tmp_path('maintenance.json'));
+
+        // Test that job is now run when not in maintenance mode
+        $this->exec('queue:worker --connection=test');
+        $this->assertExitSuccess();
+        $this->assertOutputContains('<cyan>Run</cyan> <text>PassOrFail</text>');
+        $this->assertOutputContains('<pass> OK </pass>');
+    }
 }

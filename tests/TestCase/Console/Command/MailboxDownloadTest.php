@@ -45,6 +45,7 @@ class MailboxDownloadTest extends OriginTestCase
         $this->exec('mailbox:download foo -v');
         $this->assertOutputContains('ERROR');
     }
+    
     public function testDownloadMessages()
     {
         if (! extension_loaded('imap')) {
@@ -53,5 +54,14 @@ class MailboxDownloadTest extends OriginTestCase
         $this->exec('mailbox:download -v');
         $this->assertExitSuccess();
         $this->assertOutputRegExp('/Downloaded ([0-9]+) message/');
+    }
+
+    public function testMaintenanceMode()
+    {
+        file_put_contents(tmp_path('maintenance.json'), json_encode([]));
+        $this->exec('mailbox:download -v');
+        $this->assertExitSuccess();
+        $this->assertErrorContains('Maintenance mode is enabled, emails will not be downloaded.');
+        @unlink(tmp_path('maintenance.json'));
     }
 }

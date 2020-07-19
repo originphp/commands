@@ -149,17 +149,30 @@ class QueueWorkerCommand extends Command
      */
     protected function processQueue(string $queue): bool
     {
-        $job = $this->connection->fetch($queue);
-
-        if (! $job) {
+        if ($this->maintenanceMode()) {
             return false;
         }
+        
+        $job = $this->connection->fetch($queue);
+       
+        if ($job) {
+            $this->dispatchJob($job);
 
-        $this->dispatchJob($job);
+            $this->checkMemoryUsage();
+    
+            return true;
+        }
+        return false;
+    }
 
-        $this->checkMemoryUsage();
-
-        return true;
+    /**
+     * Checks if maintenance is enabled
+     *
+     * @return boolean
+     */
+    protected function maintenanceMode() : bool
+    {
+        return file_exists(tmp_path('maintenance.json'));
     }
 
     /**

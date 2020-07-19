@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.2.1] - 2020-07-19
+
+### Changed
+
+- Changed `QueueWorkerCommand` to not process jobs when in maintenance mode
+- Changed `MailboxDownloadCommand` to not download email when in maintenance mode
 
 ## [3.2.0] - 2020-07-18
 
