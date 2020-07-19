@@ -40,5 +40,7 @@ class MaintenanceStartCommandTest extends \PHPUnit\Framework\TestCase
         $this->exec('maintenance:start');
         $this->assertExitSuccess();
         $this->assertErrorContains('Application is already in maintainence mode.');
+
+        @unlink(tmp_path('maintenance.json'));
     }
 }

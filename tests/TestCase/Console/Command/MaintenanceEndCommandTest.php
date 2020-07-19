@@ -40,5 +40,7 @@ class MaintenanceEndCommandTest extends \PHPUnit\Framework\TestCase
 
         $this->assertExitSuccess();
         $this->assertOutputContains('Application is no longer in maintainence mode.');
+
+        @unlink(tmp_path('maintenance.json'));
     }
 }
