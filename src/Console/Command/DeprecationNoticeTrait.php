@@ -18,9 +18,9 @@ use Origin\Core\Config;
 
 trait DeprecationNoticeTrait
 {
-    protected function checkForDeprecations() : void
+    protected function checkForDeprecations(): void
     {
-        if (!Config::exists('App.schemaFormat')) {
+        if (! Config::exists('App.schemaFormat')) {
             deprecationWarning('The Schema.format setting is deprecated use App.schemaFormat instead.');
         }
     }

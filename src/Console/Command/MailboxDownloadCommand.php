@@ -15,9 +15,9 @@ declare(strict_types = 1);
 namespace Commands\Console\Command;
 
 use Exception;
+use Origin\Core\Config;
 use Origin\Mailbox\Mailbox;
 use Origin\Console\Command\Command;
-use Origin\Core\Config;
 use Origin\Mailbox\Model\ImapMessage;
 use Origin\Mailbox\Model\InboundEmail;
 
@@ -37,7 +37,7 @@ class MailboxDownloadCommand extends Command
         $this->loadModel('InboundEmail', ['className' => InboundEmail::class]);
         $this->loadModel('Imap', ['className' => ImapMessage::class]);
 
-        if (!Config::exists('App.mailboxKeepEmails')) {
+        if (! Config::exists('App.mailboxKeepEmails')) {
             deprecationWarning('The mailboxKeepEmails setting is deprecated use App.mailboxKeepEmails instead.');
         }
     }
@@ -79,7 +79,7 @@ class MailboxDownloadCommand extends Command
      *
      * @return boolean
      */
-    protected function maintenanceMode() : bool
+    protected function maintenanceMode(): bool
     {
         return file_exists(tmp_path('maintenance.json'));
     }

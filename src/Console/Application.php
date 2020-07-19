@@ -5,7 +5,6 @@
 namespace Commands\Console;
 
 use Origin\Console\BaseApplication;
-use Origin\Core\Config;
 
 /**
  * @codeCoverageIgnore

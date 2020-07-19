@@ -162,6 +162,7 @@ class QueueWorkerCommand extends Command
     
             return true;
         }
+
         return false;
     }
 
@@ -170,7 +171,7 @@ class QueueWorkerCommand extends Command
      *
      * @return boolean
      */
-    protected function maintenanceMode() : bool
+    protected function maintenanceMode(): bool
     {
         return file_exists(tmp_path('maintenance.json'));
     }
