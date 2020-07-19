@@ -21,7 +21,7 @@ use Origin\Console\Command\Command;
 class MaintenanceStartCommand extends Command
 {
     protected $name = 'maintenance:start';
-    protected $description = 'Puts your application in maintenance mode.';
+    protected $description = 'Puts your application in maintenance mode';
  
     protected function initialize(): void
     {
