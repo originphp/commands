@@ -21,7 +21,7 @@ use Origin\Console\Command\Command;
 class MaintenanceEndCommand extends Command
 {
     protected $name = 'maintenance:end';
-    protected $description = 'Takes your application out of maintenance mode.';
+    protected $description = 'Takes your application out of maintenance mode';
 
     protected function execute(): void
     {
