@@ -4,7 +4,7 @@
 
 ### Removed
 
-- Removed default message from `MaintenanceStartCommand`
+- Removed default value for message from `MaintenanceStartCommand`
 
 ## [3.2.1] - 2020-07-19
 
