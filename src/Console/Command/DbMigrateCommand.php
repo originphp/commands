@@ -14,8 +14,9 @@
 declare(strict_types = 1);
 namespace Commands\Console\Command;
 
-use Origin\Model\Model;
+use Origin\Core\Plugin;
 
+use Origin\Model\Model;
 use Origin\Console\Command\Command;
 use Origin\Core\Exception\Exception;
 use Origin\Model\Concern\Timestampable;
@@ -29,8 +30,6 @@ class DbMigrateCommand extends Command
 {
     protected $name = 'db:migrate';
     protected $description = 'Runs and rollsback migrations';
-
-    const PATH = DATABASE . DS . 'migrations';
 
     /**
      * Undocumented variable
@@ -160,7 +159,7 @@ class DbMigrateCommand extends Command
      */
     private function createMigration(object $object)
     {
-        include_once self::PATH . DIRECTORY_SEPARATOR . $object->filename;
+        include_once $object->file;
         $adapter = $this->Migration->connection()->adapter();
 
         return new $object->class($adapter);
@@ -205,25 +204,50 @@ class DbMigrateCommand extends Command
      */
     private function getMigrations(int $from = null, int $to = null): array
     {
-        $results = array_diff(scandir(self::PATH), ['.', '..']);
-        $migrations = [];
-        foreach ($results as $file) {
-            $class = pathinfo($file, PATHINFO_FILENAME);
-         
-            if (preg_match('/^([0-9]{14})(.*)/', $class, $matches)) {
-                $version = $matches[1];
-                if (($from && $version <= $from) || ($to && $version > $to)) {
-                    continue;
+        foreach ($this->paths() as $path) {
+            if (! is_dir($path)) {
+                continue;
+            }
+            $results = array_diff(scandir($path), ['.', '..']);
+            $migrations = [];
+            foreach ($results as $file) {
+                $class = pathinfo($file, PATHINFO_FILENAME);
+             
+                if (preg_match('/^([0-9]{14})(.*)/', $class, $matches)) {
+                    $version = $matches[1];
+                    if (($from && $version <= $from) || ($to && $version > $to)) {
+                        continue;
+                    }
+                    $migrations[] = (object) [
+                        'name' => $matches[2],
+                        'version' => $matches[1],
+                        'class' => $matches[2] .'Migration',
+                        'file' => $path . '/' . $file,
+                    ];
                 }
-                $migrations[] = (object) [
-                    'name' => $matches[2],
-                    'version' => $matches[1],
-                    'class' => $matches[2] .'Migration',
-                    'filename' => $file,
-                ];
             }
         }
 
         return $migrations;
+    }
+
+    /**
+     * Gets the paths to scan
+     *
+     * @return array
+     */
+    private function paths(): array
+    {
+        $folder = '/database/migrations';
+
+        $paths = [
+            ROOT . $folder
+        ];
+
+        foreach (Plugin::loaded() as $plugin) {
+            $paths[] = Plugin::path($plugin) . $folder;
+        }
+
+        return $paths;
     }
 }

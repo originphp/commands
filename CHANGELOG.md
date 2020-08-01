@@ -2,6 +2,10 @@
 
 ## [unreleased]
 
+### Changed
+
+- Changed `DbMigrateCommand` to also scan `Plugin` directories
+
 ### Removed
 
 - Removed default value for message from `MaintenanceStartCommand`
