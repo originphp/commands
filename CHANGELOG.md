@@ -1,6 +1,6 @@
 # Changelog
 
-## [unreleased]
+## ## [3.2.2] 2020-08-02
 
 ### Changed
 
