@@ -1,32 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit colors="true" processIsolation="false" stopOnFailure="false" bootstrap="./config/bootstrap.php" backupGlobals="true">
-    <testsuites>
-        <testsuite name="OriginPHP Commands Test Suite">
-            <directory>./tests/TestCase</directory>
-        </testsuite>
-    </testsuites>
-    <php>
-        <const name="PHPUNIT" value="true"/>
-        <env name="ORIGIN_ENV" value="test"/>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" colors="true" processIsolation="false" stopOnFailure="false" bootstrap="./config/bootstrap.php" backupGlobals="true" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
+  <coverage>
+    <include>
+      <directory suffix=".php">src/</directory>
+    </include>
+  </coverage>
+  <testsuites>
+    <testsuite name="Commands Test Suite">
+      <directory>./tests/TestCase</directory>
+    </testsuite>
+  </testsuites>
+  <php>
+    <const name="PHPUNIT" value="true"/>
+    <env name="ORIGIN_ENV" value="test"/>
 
-        <!-- # Database Settings mysql/postgres
-            <env name="DB_HOST" value="localhost" />
-            <env name="DB_USERNAME" value="root" />
-            <env name="DB_PASSWORD" value="root" />
-            <env name="DB_ENGINE" value="mysql" />
-            <env name="IMAP_HOST" value="imap.gmail.com" />
-            <env name="IMAP_PORT" value="993" />
-            <env name="IMAP_USERNAME" value="somebody@gmail.com" />
-            <env name="IMAP_PASSWORD" value="secret" />
-            <env name="IMAP_ENCRYPTION" value="ssl" />
-        -->
-    </php>
-    <listeners>
-        <listener class="Origin\TestSuite\OriginTestListener"  file ="./vendor/originphp/framework/src/TestSuite/OriginTestListener.php"></listener>
-    </listeners>
-    <filter>
-        <whitelist>
-            <directory suffix=".php">./src/</directory>
-        </whitelist>
-    </filter>
+    <!-- 
+      <env name="DB_HOST" value="127.0.0.1" />
+      <env name="DB_USERNAME" value="root" />
+      <env name="DB_PASSWORD" value="root" />
+      <env name="DB_DATABASE" value="originphp" />
+      <env name="DB_ENGINE" value="mysql" />
+    -->
+
+    <!-- 
+      <env name="IMAP_HOST" value="imap.gmail.com" />
+      <env name="IMAP_PORT" value="993" />
+      <env name="IMAP_USERNAME" value="somebody@gmail.com" />
+      <env name="IMAP_PASSWORD" value="secret" />
+      <env name="IMAP_ENCRYPTION" value="ssl" />
+    -->
+  </php>
+  <listeners>
+    <listener class="Origin\TestSuite\OriginTestListener" file="./vendor/originphp/framework/src/TestSuite/OriginTestListener.php"/>
+  </listeners>
 </phpunit>

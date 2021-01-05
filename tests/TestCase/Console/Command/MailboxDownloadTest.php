@@ -1,7 +1,7 @@
 <?php
 /**
  * OriginPHP Framework
- * Copyright 2018 - 2020 Jamiel Sharief.
+ * Copyright 2018 - 2021 Jamiel Sharief.
  *
  * Licensed under The MIT License
  * The above copyright notice and this permission notice shall be included in all copies or substantial
@@ -32,11 +32,13 @@ class MailboxDownloadTest extends OriginTestCase
         $this->assertExitError();
     }
 
+  
     public function testInvalidAccount()
     {
         if (! extension_loaded('imap')) {
             $this->markTestSkipped();
         }
+
         Mailbox::config('foo', [
             'host' => 'localhost',
             'username' => 'nobody',
@@ -51,6 +53,11 @@ class MailboxDownloadTest extends OriginTestCase
         if (! extension_loaded('imap')) {
             $this->markTestSkipped();
         }
+
+        if (! getenv('IMAP_HOST') ||! getenv('IMAP_USERNAME') || ! getenv('IMAP_PASSWORD')) {
+            $this->markTestSkipped();
+        }
+        
         $this->exec('mailbox:download -v');
         $this->assertExitSuccess();
         $this->assertOutputRegExp('/Downloaded ([0-9]+) message/');
