@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.2.4] 2021-01-14
+
+### Changed
+
+- Added option to use version 2.0 of the plugin installer
+
 ## [3.2.3] 2021-01-04
 
 ## [3.2.2] 2020-08-15

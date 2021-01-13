@@ -48,8 +48,11 @@ class DbTestPrepareCommandTest extends \PHPUnit\Framework\TestCase
          */
         
         if ($this->isSqlite()) {
-            @unlink(ROOT . '/tmp123');
-            @unlink(ROOT . '/commands.sqlite3');
+            foreach ([ROOT . '/tmp123',ROOT . '/commands.sqlite3'] as $file) {
+                if (file_exists($file)) {
+                    unlink($file);
+                }
+            }
         } else {
             $connection = ConnectionManager::get('test');
             $connection->transaction(function ($connection) {

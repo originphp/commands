@@ -41,7 +41,9 @@ class DbDropCommandTest extends OriginTestCase
     {
         ConnectionManager::drop('d2'); // Postgres & SQLite issues
         if ($this->isSqlite()) {
-            @unlink(ROOT . '/d2');
+            if (file_exists(ROOT . '/d2')) {
+                unlink(ROOT . '/d2');
+            }
         } else {
             $ds = ConnectionManager::get('test');
             $ds->execute('DROP DATABASE IF EXISTS d2');

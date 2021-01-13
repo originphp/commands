@@ -22,7 +22,7 @@ class MaintenanceStartCommandTest extends \PHPUnit\Framework\TestCase
 
     public function testExecution()
     {
-        @unlink(tmp_path('maintenance.json'));
+        $this->deleteFile(tmp_path('maintenance.json'));
    
         $this->exec('maintenance:start --message="Upgrading database" --retry=60 --allow=192.168.1.100'); // Inject data
 
@@ -41,6 +41,12 @@ class MaintenanceStartCommandTest extends \PHPUnit\Framework\TestCase
         $this->assertExitSuccess();
         $this->assertErrorContains('Application is already in maintainence mode.');
 
-        @unlink(tmp_path('maintenance.json'));
+        $this->deleteFile(tmp_path('maintenance.json'));
+    }
+    public function deleteFile(string $file) : void
+    {
+        if (file_exists($file)) {
+            unlink($file);
+        }
     }
 }

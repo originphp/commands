@@ -69,6 +69,13 @@ class MailboxDownloadTest extends OriginTestCase
         $this->exec('mailbox:download -v');
         $this->assertExitSuccess();
         $this->assertErrorContains('Maintenance mode is enabled, emails will not be downloaded.');
-        @unlink(tmp_path('maintenance.json'));
+        $this->deleteFile(tmp_path('maintenance.json'));
+    }
+
+    public function deleteFile(string $file) : void
+    {
+        if (file_exists($file)) {
+            unlink($file);
+        }
     }
 }

@@ -40,7 +40,9 @@ class DbResetCommandTest extends \PHPUnit\Framework\TestCase
     {
         ConnectionManager::drop('d3'); // Postgres & SQLite issues
         if ($this->isSqlite()) {
-            @unlink(ROOT . '/d3');
+            if (file_exists(ROOT . '/d3')) {
+                unlink(ROOT . '/d3');
+            }
         } else {
             $ds = ConnectionManager::get('test');
             $ds->execute('DROP DATABASE IF EXISTS d3');

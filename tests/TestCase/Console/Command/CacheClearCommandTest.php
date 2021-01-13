@@ -31,6 +31,6 @@ class CacheClearCommandTest extends \PHPUnit\Framework\TestCase
 
         $this->assertExitSuccess();
         $this->assertOutputContains('default');
-        $this->assertFalse(Cache::read('foo'));
+        $this->assertNull(Cache::read('foo'));
     }
 }
