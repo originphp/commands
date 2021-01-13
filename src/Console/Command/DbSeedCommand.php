@@ -149,7 +149,7 @@ class DbSeedCommand extends Command
             if (is_string($replace)) {
                 $replace = "'{$replace}'";
             }
-            $sql = preg_replace("/\B:{$needle}/", $replace, $sql);
+            $sql = preg_replace("/\B:{$needle}/", (string) $replace, $sql);
         }
 
         return $sql;

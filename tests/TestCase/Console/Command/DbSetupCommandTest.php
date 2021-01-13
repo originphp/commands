@@ -94,7 +94,11 @@ class DbSetupCommandTest extends \PHPUnit\Framework\TestCase
     public function testExecutePluginPath()
     {
         # Create fake plugin
-        @mkdir(sys_get_temp_dir() . '/plugins/make', 0775, true);
+        $directory = sys_get_temp_dir() . '/plugins/make';
+        if (!is_dir($directory)) {
+            mkdir($directory, 0775, true);
+        }
+    
         Plugin::load('Make', ['path' => sys_get_temp_dir() . '/plugins/make']);
 
         $this->exec('db:setup --connection=d4 --type=sql Make.pschema');
