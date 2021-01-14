@@ -40,7 +40,9 @@ class DbCreateCommandTest extends \PHPUnit\Framework\TestCase
     {
         ConnectionManager::drop('d1'); // Postgres & SQLite issues
         if ($this->isSqlite()) {
-            @unlink(ROOT . '/d1');
+            if (file_exists(ROOT . '/d1')) {
+                unlink(ROOT . '/d1');
+            }
         } else {
             $ds = ConnectionManager::get('test');
             $ds->execute('DROP DATABASE IF EXISTS d1');

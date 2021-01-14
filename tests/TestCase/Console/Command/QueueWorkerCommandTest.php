@@ -30,7 +30,7 @@ class PassOrFailJob extends Job
     public function execute(bool $pass = true)
     {
         if (! $pass) {
-            $a = 1 / 0;
+            $value = $abc['foo'];
         }
     }
     public function errorHandler(\Exception $exception): void
@@ -105,12 +105,18 @@ class QueueWorkerCommandTest extends OriginTestCase
         $this->assertExitSuccess();
         $this->assertOutputNotContains('<cyan>Run</cyan> <text>PassOrFail</text>');
         $this->assertOutputNotContains('<pass> OK </pass>');
-        @unlink(tmp_path('maintenance.json'));
+        $this->deleteFile(tmp_path('maintenance.json'));
 
         // Test that job is now run when not in maintenance mode
         $this->exec('queue:worker --connection=test');
         $this->assertExitSuccess();
         $this->assertOutputContains('<cyan>Run</cyan> <text>PassOrFail</text>');
         $this->assertOutputContains('<pass> OK </pass>');
+    }
+    public function deleteFile(string $file) : void
+    {
+        if (file_exists($file)) {
+            unlink($file);
+        }
     }
 }

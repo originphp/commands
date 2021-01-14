@@ -76,7 +76,10 @@ class DbSchemaDumpCommandTest extends OriginTestCase
         $this->exec('db:schema:dump --connection=test --type=sql dump', ['n']);
         $this->assertExitError();
         $this->assertErrorContains('Error saving schema file');
-        @unlink(DATABASE . DS . '/dump.sql');
+       
+        if (file_exists(DATABASE . DS . '/dump.sql')) {
+            unlink(DATABASE . DS . '/dump.sql');
+        }
     }
 
     public function testDumpPHPException()
@@ -84,7 +87,9 @@ class DbSchemaDumpCommandTest extends OriginTestCase
         $this->exec('db:schema:dump --connection=test --type=php dump', ['n']);
         $this->assertExitError();
         $this->assertErrorContains('Error saving schema file');
-        @unlink(DATABASE . DS . '/dump.php');
+        if (file_exists(DATABASE . DS . '/dump.php')) {
+            unlink(DATABASE . DS . '/dump.php');
+        }
     }
 
     public function testDumpUnkownType()

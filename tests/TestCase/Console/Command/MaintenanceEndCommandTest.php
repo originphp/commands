@@ -22,7 +22,7 @@ class MaintenanceEndCommandTest extends \PHPUnit\Framework\TestCase
 
     public function testNotDown()
     {
-        @unlink(tmp_path('maintenance.json'));
+        $this->deleteFile(tmp_path('maintenance.json'));
    
         $this->exec('maintenance:end'); // Inject data
         $this->assertExitSuccess();
@@ -41,6 +41,13 @@ class MaintenanceEndCommandTest extends \PHPUnit\Framework\TestCase
         $this->assertExitSuccess();
         $this->assertOutputContains('Application is no longer in maintainence mode.');
 
-        @unlink(tmp_path('maintenance.json'));
+        $this->deleteFile(tmp_path('maintenance.json'));
+    }
+
+    public function deleteFile(string $file) : void
+    {
+        if (file_exists($file)) {
+            unlink($file);
+        }
     }
 }

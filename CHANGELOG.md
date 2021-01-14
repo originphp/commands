@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.3.0] 2021-01-14
+
+### Fixed
+
+- Fixed PHP 8.0 issues
+
+### Changed
+
+- Increase max plugin installer version
+
 ## [3.2.3] 2021-01-04
 
 ## [3.2.2] 2020-08-15
