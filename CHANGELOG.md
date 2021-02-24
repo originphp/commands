@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.4.1] 2021-02-24
+
+### Changed
+
+- Changed Schedule::run to work with changed exceptions
+
 ### [3.4.0] 2021-02-24
 
 ### Added

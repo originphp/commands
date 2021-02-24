@@ -14,9 +14,9 @@
 declare(strict_types = 1);
 namespace Commands\Console\Command;
 
-use Exception;
 use Origin\Schedule\Schedule;
 use Origin\Console\Command\Command;
+use Origin\Schedule\Exception\ScheduleException;
 
 class ScheduleRunCommand extends Command
 {
@@ -45,13 +45,9 @@ class ScheduleRunCommand extends Command
             $path = (defined('ROOT') ? ROOT : getcwd()) . '/app/Task';
         }
 
-        if (! is_dir($path)) {
-            $this->throwError('Directory does not exist');
-        }
-  
         try {
             Schedule::run($path, $this->options('id'));
-        } catch (Exception $exception) {
+        } catch (ScheduleException $exception) {
             $this->throwError($exception->getMessage());
         }
     }
