@@ -46,10 +46,6 @@ Queue::config('test', [
     'connection' => 'test'
 ]);
 
-Queue::config('test', [
-    'engine' => 'Database',
-    'connection' => 'test'
-]);
 
 Cache::config('origin', [
     'className' => FileEngine::class,
