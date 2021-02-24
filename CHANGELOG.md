@@ -1,10 +1,16 @@
 # Changelog
 
-## [3.3.0] 2021-02-24
+### [3.4.0] 2021-02-24
 
 ### Added
 
-- Added schedule:run
+- Added Schedule::run
+
+## [3.3.0] 2021-01-14
+
+### Fixed
+
+- Fixed PHP 8 Issues
 
 ## [3.2.4] 2021-01-14
 
