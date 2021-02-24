@@ -12,14 +12,14 @@
  * @license      https://opensource.org/licenses/mit-license.php MIT License
  */
 declare(strict_types = 1);
-namespace Commands\Test\Console\Command;
+namespace Commands\Test\TestCase\Console\Command;
 
 use Origin\Model\ConnectionManager;
 
 use Origin\TestSuite\ConsoleIntegrationTestTrait;
 
 /**
- * This is test is causing problems when run in group, have not identified the issue yet.
+ * @internal if you run into troubl
  */
 class DbTestPrepareCommandTest extends \PHPUnit\Framework\TestCase
 {
@@ -46,14 +46,11 @@ class DbTestPrepareCommandTest extends \PHPUnit\Framework\TestCase
         /**
          * Clean up tables
          */
-        
-        if ($this->isSqlite()) {
-            foreach ([ROOT . '/tmp123',ROOT . '/commands.sqlite3'] as $file) {
-                if (file_exists($file)) {
-                    unlink($file);
-                }
-            }
-        } else {
+        foreach ([ROOT . '/tmp123',ROOT . '/database/commands.sqlite3'] as $file) {
+            $this->deleteIfExists($file);
+        }
+                   
+        if (!$this->isSqlite()) {
             $connection = ConnectionManager::get('test');
             $connection->transaction(function ($connection) {
                 foreach (['bookmarks', 'bookmarks_tags','tags','users'] as $table) {
@@ -72,5 +69,12 @@ class DbTestPrepareCommandTest extends \PHPUnit\Framework\TestCase
     private function isSqlite(): bool
     {
         return ConnectionManager::get('test')->engine() === 'sqlite';
+    }
+
+    private function deleteIfExists(string $path)
+    {
+        if (file_exists($path)) {
+            unlink($path);
+        }
     }
 }

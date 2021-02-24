@@ -12,7 +12,7 @@
  * @license      https://opensource.org/licenses/mit-license.php MIT License
  */
 declare(strict_types = 1);
-namespace Commands\Test\Console\Command;
+namespace Commands\Test\TestCase\Console\Command;
 
 use Origin\Model\ConnectionManager;
 use Origin\TestSuite\OriginTestCase;

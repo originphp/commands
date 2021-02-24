@@ -21,9 +21,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Commands\\Test\\Task\\": "tests/Task",
-      "Commands\\Test\\Fixture\\": "tests/Fixture",
-      "Commands\\Test\\": "tests/TestCase"
+      "Commands\\Test\\": "tests/"
     }
   },
   "require": {
