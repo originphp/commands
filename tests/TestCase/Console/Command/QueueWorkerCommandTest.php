@@ -113,6 +113,19 @@ class QueueWorkerCommandTest extends OriginTestCase
         $this->assertOutputContains('<cyan>Run</cyan> <text>PassOrFail</text>');
         $this->assertOutputContains('<pass> OK </pass>');
     }
+
+
+    public function testMaxSeconds()
+    {
+        $started = time();
+
+        $this->exec('queue:worker -d --seconds=2 --sleep=0');
+
+        $took = time() - $started ;
+
+        $this->assertGreaterThan(2, $took);
+    }
+
     public function deleteFile(string $file) : void
     {
         if (file_exists($file)) {

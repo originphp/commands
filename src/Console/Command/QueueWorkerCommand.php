@@ -49,6 +49,13 @@ class QueueWorkerCommand extends Command
     protected $stopped = false;
 
     /**
+     * timestamp
+     *
+     * @var int
+     */
+    private $started;
+
+    /**
      * The initialize method (called after construct)
      *
      * @return void
@@ -126,6 +133,9 @@ class QueueWorkerCommand extends Command
     protected function daemon(array $queues): void
     {
         $sleep = $this->options('sleep');
+        $maxSeconds = $this->options('seconds');
+    
+        $this->started = time();
 
         while ($this->isRunning()) {
             $ranJobs = false;
@@ -138,7 +148,22 @@ class QueueWorkerCommand extends Command
             if (! $ranJobs && $sleep) {
                 sleep($sleep);
             }
+
+            if ($maxSeconds && $this->reachedLimit($maxSeconds)) {
+                break;
+            }
         }
+    }
+
+    /**
+     * @param integer $maxSeconds
+     * @return boolean
+     */
+    private function reachedLimit(int $maxSeconds) : bool
+    {
+        $runningFor = time() - $this->started;
+
+        return $runningFor > $maxSeconds;
     }
 
     /**
@@ -350,6 +375,11 @@ class QueueWorkerCommand extends Command
             'description' => 'Set a memory limit to be used',
             'default' => 128,
             'type' => 'integer',
+        ]);
+
+        $this->addOption('seconds', [
+            'description' => 'The maximum of seconds that the daemon should run for',
+            'type' => 'integer'
         ]);
     }
 

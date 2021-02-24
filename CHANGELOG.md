@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.5.0] 2021-02-24
+
+### Added
+
+- Added seconds option to queue:worker command to set the amount of maximum time that the queue worker daemon should run for
+
 ## [3.4.2] 2021-02-24
 
 ### Changed
